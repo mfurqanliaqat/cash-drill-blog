@@ -25,23 +25,34 @@ export function TableOfContents({ items, className }: TableOfContentsProps) {
   }, [])
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      entries => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            setActiveId(entry.target.id)
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY
+      const viewportHeight = window.innerHeight
+      const threshold = viewportHeight * 0.1 // 10% from top
+
+      let currentId = items[0]?.id || ''
+      for (let i = 0; i < items.length; i++) {
+        const item = items[i]
+        const element = document.getElementById(item.id)
+        if (element) {
+          const rect = element.getBoundingClientRect()
+          const top = rect.top
+          if (top - threshold <= 0) {
+            currentId = item.id
+          } else {
+            break
           }
-        })
-      },
-      { rootMargin: '-20% 0px -35% 0px' }
-    )
+        }
+      }
+      setActiveId(currentId)
+    }
 
-    items.forEach(item => {
-      const element = document.getElementById(item.id)
-      if (element) observer.observe(element)
-    })
-
-    return () => observer.disconnect()
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    // Call once to set initial state
+    handleScroll()
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
   }, [items])
 
   // Update progress bar and scroll active chip into view
