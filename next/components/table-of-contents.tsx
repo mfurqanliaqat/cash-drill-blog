@@ -24,20 +24,29 @@ export function TableOfContents({ items, className }: TableOfContentsProps) {
     scrollTimeoutRef.current = setTimeout(callback, delay)
   }, [])
 
+  // Update scroll progress bar (vertical scroll)
   useEffect(() => {
     const handleScroll = () => {
-      const scrollPosition = window.scrollY
-      const viewportHeight = window.innerHeight
-      const threshold = viewportHeight * 0.1 // 10% from top
+      const scrollTop = window.scrollY
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight
+      const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0
+      setProgressWidth(Math.max(0, Math.min(100, progress)))
+    }
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    handleScroll()
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const offset = 100 // Height of sticky header
       let currentId = items[0]?.id || ''
       for (let i = 0; i < items.length; i++) {
         const item = items[i]
         const element = document.getElementById(item.id)
         if (element) {
-          const rect = element.getBoundingClientRect()
-          const top = rect.top
-          if (top - threshold <= 0) {
+          const top = element.getBoundingClientRect().top
+          if (top - offset <= 0) {
             currentId = item.id
           } else {
             break
@@ -46,62 +55,34 @@ export function TableOfContents({ items, className }: TableOfContentsProps) {
       }
       setActiveId(currentId)
     }
-
     window.addEventListener('scroll', handleScroll, { passive: true })
-    // Call once to set initial state
     handleScroll()
     return () => {
       window.removeEventListener('scroll', handleScroll)
     }
   }, [items])
 
-  // Update progress bar and scroll active chip into view
+  // Auto-center the active chip in the horizontal nav
   useEffect(() => {
     if (!activeId || !navRef.current || !activeButtonRef.current) return
-
-    const updateProgressAndScroll = () => {
-      const nav = navRef.current
-      const activeButton = activeButtonRef.current
-      if (!nav || !activeButton) return
-
-      const navRect = nav.getBoundingClientRect()
-      const buttonRect = activeButton.getBoundingClientRect()
-
-      // Calculate progress based on button position relative to nav
-      const navWidth = navRect.width
-      const buttonLeft = buttonRect.left - navRect.left
-      const buttonWidth = buttonRect.width
-      const buttonCenter = buttonLeft + buttonWidth / 2
-
-      // Progress as percentage of nav width
-      const progress = (buttonCenter / navWidth) * 100
-      setProgressWidth(Math.max(0, Math.min(100, progress)))
-
-      // Smooth scroll active chip into center view
-      const navCenter = navWidth / 2
-      const scrollOffset = buttonCenter - navCenter
-
-      // Only scroll if the button is significantly off-center
-      if (Math.abs(scrollOffset) > 30) {
-        nav.scrollTo({
-          left: nav.scrollLeft + scrollOffset,
-          behavior: 'smooth'
-        })
-      }
+    const nav = navRef.current
+    const activeButton = activeButtonRef.current
+    const navRect = nav.getBoundingClientRect()
+    const buttonRect = activeButton.getBoundingClientRect()
+    const navWidth = navRect.width
+    const buttonLeft = buttonRect.left - navRect.left
+    const buttonWidth = buttonRect.width
+    const buttonCenter = buttonLeft + buttonWidth / 2
+    const navCenter = navWidth / 2
+    const scrollOffset = buttonCenter - navCenter
+    // Only scroll if the button is significantly off-center
+    if (Math.abs(scrollOffset) > 30) {
+      nav.scrollTo({
+        left: nav.scrollLeft + scrollOffset,
+        behavior: 'smooth'
+      })
     }
-
-    // Debounce the update to prevent excessive calculations
-    debouncedScroll(updateProgressAndScroll, 50)
-  }, [activeId, debouncedScroll])
-
-  // Cleanup timeout on unmount
-  useEffect(() => {
-    return () => {
-      if (scrollTimeoutRef.current) {
-        clearTimeout(scrollTimeoutRef.current)
-      }
-    }
-  }, [])
+  }, [activeId])
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id)
@@ -118,42 +99,43 @@ export function TableOfContents({ items, className }: TableOfContentsProps) {
   }
 
   return (
-    <div
-      className={cn(
-        'sticky top-0 z-40 bg-neutral-900/95 backdrop-blur-sm border-b border-neutral-800 shadow-sm',
-        className
-      )}
-    >
-      <div className="container mx-auto px-4">
-        <nav
-          ref={navRef}
-          className="flex items-center space-x-6 overflow-x-auto py-3 scrollbar-hide relative"
-        >
-          {items.map(item => (
-            <button
-              key={item.id}
-              ref={activeId === item.id ? activeButtonRef : null}
-              onClick={() => scrollToSection(item.id)}
-              className={cn(
-                'whitespace-nowrap text-sm font-medium transition-all duration-200 hover:text-neutral-200 px-2 py-1 rounded-md relative z-10',
-                activeId === item.id
-                  ? 'text-neutral-200 bg-neutral-800/50 border-b-2 border-blue-500'
-                  : 'text-neutral-400 hover:bg-neutral-800/30'
-              )}
-            >
-              {item.title}
-            </button>
-          ))}
-
-          {/* Progress bar */}
-          <div className="absolute bottom-0 left-0 h-0.5 bg-neutral-700 w-full">
-            <div
-              className="h-full bg-blue-500 transition-all duration-300 ease-out"
-              style={{ width: `${progressWidth}%` }}
-            />
-          </div>
-        </nav>
+    <>
+      <div
+        className={cn(
+          'sticky top-0 z-40 bg-neutral-900/95 backdrop-blur-sm border-b border-neutral-800 shadow-sm',
+          className
+        )}
+      >
+        <div className="container mx-auto px-4">
+          <nav
+            ref={navRef}
+            className="flex items-center space-x-6 overflow-x-auto py-3 scrollbar-hide relative"
+          >
+            {items.map(item => (
+              <button
+                key={item.id}
+                ref={activeId === item.id ? activeButtonRef : null}
+                onClick={() => scrollToSection(item.id)}
+                className={cn(
+                  'whitespace-nowrap text-sm font-medium transition-all duration-200 hover:text-neutral-200 px-2 py-1 rounded-md relative z-10',
+                  activeId === item.id
+                    ? 'text-neutral-200 bg-neutral-800/50 border-b-2 border-blue-500'
+                    : 'text-neutral-400 hover:bg-neutral-800/30'
+                )}
+              >
+                {item.title}
+              </button>
+            ))}
+          </nav>
+        </div>
+        {/* Progress bar directly below header */}
+        <div className="w-full h-1 bg-neutral-700">
+          <div
+            className="h-full bg-blue-500 transition-all duration-300 ease-out"
+            style={{ width: `${progressWidth}%` }}
+          />
+        </div>
       </div>
-    </div>
+    </>
   )
 }
