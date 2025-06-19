@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import { cn } from '@/lib/utils'
 import { TOCItem } from '@/lib/toc'
 
@@ -11,6 +11,18 @@ interface TableOfContentsProps {
 
 export function TableOfContents({ items, className }: TableOfContentsProps) {
   const [activeId, setActiveId] = useState<string>('')
+  const [progressWidth, setProgressWidth] = useState(0)
+  const navRef = useRef<HTMLElement>(null)
+  const activeButtonRef = useRef<HTMLButtonElement>(null)
+  const scrollTimeoutRef = useRef<NodeJS.Timeout>()
+
+  // Debounced scroll function
+  const debouncedScroll = useCallback((callback: () => void, delay: number) => {
+    if (scrollTimeoutRef.current) {
+      clearTimeout(scrollTimeoutRef.current)
+    }
+    scrollTimeoutRef.current = setTimeout(callback, delay)
+  }, [])
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -31,6 +43,54 @@ export function TableOfContents({ items, className }: TableOfContentsProps) {
 
     return () => observer.disconnect()
   }, [items])
+
+  // Update progress bar and scroll active chip into view
+  useEffect(() => {
+    if (!activeId || !navRef.current || !activeButtonRef.current) return
+
+    const updateProgressAndScroll = () => {
+      const nav = navRef.current
+      const activeButton = activeButtonRef.current
+      if (!nav || !activeButton) return
+
+      const navRect = nav.getBoundingClientRect()
+      const buttonRect = activeButton.getBoundingClientRect()
+
+      // Calculate progress based on button position relative to nav
+      const navWidth = navRect.width
+      const buttonLeft = buttonRect.left - navRect.left
+      const buttonWidth = buttonRect.width
+      const buttonCenter = buttonLeft + buttonWidth / 2
+
+      // Progress as percentage of nav width
+      const progress = (buttonCenter / navWidth) * 100
+      setProgressWidth(Math.max(0, Math.min(100, progress)))
+
+      // Smooth scroll active chip into center view
+      const navCenter = navWidth / 2
+      const scrollOffset = buttonCenter - navCenter
+
+      // Only scroll if the button is significantly off-center
+      if (Math.abs(scrollOffset) > 30) {
+        nav.scrollTo({
+          left: nav.scrollLeft + scrollOffset,
+          behavior: 'smooth'
+        })
+      }
+    }
+
+    // Debounce the update to prevent excessive calculations
+    debouncedScroll(updateProgressAndScroll, 50)
+  }, [activeId, debouncedScroll])
+
+  // Cleanup timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (scrollTimeoutRef.current) {
+        clearTimeout(scrollTimeoutRef.current)
+      }
+    }
+  }, [])
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id)
@@ -54,13 +114,17 @@ export function TableOfContents({ items, className }: TableOfContentsProps) {
       )}
     >
       <div className="container mx-auto px-4">
-        <nav className="flex items-center space-x-6 overflow-x-auto py-3 scrollbar-hide">
+        <nav
+          ref={navRef}
+          className="flex items-center space-x-6 overflow-x-auto py-3 scrollbar-hide relative"
+        >
           {items.map(item => (
             <button
               key={item.id}
+              ref={activeId === item.id ? activeButtonRef : null}
               onClick={() => scrollToSection(item.id)}
               className={cn(
-                'whitespace-nowrap text-sm font-medium transition-all duration-200 hover:text-neutral-200 px-2 py-1 rounded-md',
+                'whitespace-nowrap text-sm font-medium transition-all duration-200 hover:text-neutral-200 px-2 py-1 rounded-md relative z-10',
                 activeId === item.id
                   ? 'text-neutral-200 bg-neutral-800/50 border-b-2 border-blue-500'
                   : 'text-neutral-400 hover:bg-neutral-800/30'
@@ -69,6 +133,14 @@ export function TableOfContents({ items, className }: TableOfContentsProps) {
               {item.title}
             </button>
           ))}
+
+          {/* Progress bar */}
+          <div className="absolute bottom-0 left-0 h-0.5 bg-neutral-700 w-full">
+            <div
+              className="h-full bg-blue-500 transition-all duration-300 ease-out"
+              style={{ width: `${progressWidth}%` }}
+            />
+          </div>
         </nav>
       </div>
     </div>
