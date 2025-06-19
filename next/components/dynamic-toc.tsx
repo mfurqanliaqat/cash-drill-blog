@@ -63,5 +63,5 @@ export function DynamicTOC({ contentRef, className }: DynamicTOCProps) {
 
   if (tocItems.length === 0) return null
 
-  return <TableOfContents items={tocItems} className={className} />
+  return <TableOfContents items={tocItems} className={className} contentRef={contentRef} />
 }

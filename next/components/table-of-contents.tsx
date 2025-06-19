@@ -7,9 +7,10 @@ import { TOCItem } from '@/lib/toc'
 interface TableOfContentsProps {
   items: TOCItem[]
   className?: string
+  contentRef?: React.RefObject<HTMLElement>
 }
 
-export function TableOfContents({ items, className }: TableOfContentsProps) {
+export function TableOfContents({ items, className, contentRef }: TableOfContentsProps) {
   const [activeId, setActiveId] = useState<string>('')
   const [progressWidth, setProgressWidth] = useState(0)
   const navRef = useRef<HTMLElement>(null)
@@ -28,14 +29,37 @@ export function TableOfContents({ items, className }: TableOfContentsProps) {
   useEffect(() => {
     const handleScroll = () => {
       const scrollTop = window.scrollY
-      const docHeight = document.documentElement.scrollHeight - window.innerHeight
-      const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0
-      setProgressWidth(Math.max(0, Math.min(100, progress)))
+      let contentHeight = 0
+      let contentTop = 0
+      let contentBottom = 0
+      if (contentRef && contentRef.current) {
+        const rect = contentRef.current.getBoundingClientRect()
+        contentHeight = contentRef.current.scrollHeight
+        contentTop = rect.top + window.scrollY
+      } else {
+        contentHeight = document.documentElement.scrollHeight
+        contentTop = 0
+      }
+      const windowHeight = window.innerHeight
+      const docHeight = contentHeight - windowHeight
+      contentBottom = contentTop + contentHeight
+      // Calculate progress based on content bottom
+      // Progress is 100% when contentBottom has crossed above scrollTop (viewport top)
+      const contentBottomDistance = contentBottom - scrollTop
+      const maxScrollDistance = contentHeight
+      const progress =
+        maxScrollDistance > 0
+          ? Math.max(
+              0,
+              Math.min(100, ((maxScrollDistance - contentBottomDistance) / maxScrollDistance) * 100)
+            )
+          : 0
+      setProgressWidth(progress)
     }
     window.addEventListener('scroll', handleScroll, { passive: true })
     handleScroll()
     return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+  }, [contentRef])
 
   useEffect(() => {
     const handleScroll = () => {
