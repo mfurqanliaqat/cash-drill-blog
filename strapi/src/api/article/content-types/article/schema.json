@@ -92,6 +92,19 @@
           "localized": true
         }
       }
+    },
+    "test": {
+      "type": "string"
+    },
+    "sample": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::category.category"
+    },
+    "author": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user"
     }
   }
 }

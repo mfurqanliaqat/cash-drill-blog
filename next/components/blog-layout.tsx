@@ -15,7 +15,7 @@ import { DynamicTOC } from './dynamic-toc'
 export function BlogLayout({
   article,
   locale,
-  children
+  children,
 }: {
   article: Article
   locale: string
@@ -25,19 +25,19 @@ export function BlogLayout({
 
   return (
     <>
-      <Container className="mt-16 lg:mt-32">
+      <Container className='mt-16 lg:mt-32'>
         <BlogArticleOverview article={article} locale={locale} />
-        <div className="xl:relative">
-          <div className="mx-auto max-w-2xl">
-            <article className="pb-8 pt-8">
+        <div className='xl:relative'>
+          <div className='mx-auto max-w-2xl'>
+            <article className='pb-8 pt-8'>
               <DynamicTOC contentRef={contentRef} />
-              <div ref={contentRef} className="mt-8 prose prose-sm prose-invert">
+              <div ref={contentRef} className='mt-8 prose prose-sm prose-invert'>
                 {children}
               </div>
-              <div className="flex space-x-2 items-center pt-12 border-t border-neutral-800 mt-12">
-                <div className="h-5 rounded-lg w-0.5 bg-neutral-700" />
-                <time dateTime={article.publishedAt} className="flex items-center text-base ">
-                  <span className="text-muted text-sm">
+              <div className='flex space-x-2 items-center pt-12 border-t border-neutral-800 mt-12'>
+                <div className='h-5 rounded-lg w-0.5 bg-neutral-700' />
+                <time dateTime={article.publishedAt} className='flex items-center text-base '>
+                  <span className='text-muted text-sm'>
                     {format(new Date(article.publishedAt), 'MMMM dd, yyyy')}
                   </span>
                 </time>
