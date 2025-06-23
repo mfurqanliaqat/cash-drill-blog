@@ -21,7 +21,7 @@ export const PayoutSmallCard: React.FC<PayoutSmallCardProps> = ({
   return (
     <div
       className={cn(
-        'flex items-center gap-3 bg-neutral-900 rounded-2xl p-1 min-w-fit shadow border border-neutral-700 cursor-pointer select-none',
+        'flex items-center gap-3 bg-neutral-900 rounded-2xl p-1 min-w-fit border-2 border-neutral-700 cursor-pointer select-none shadow-[0_3px_0_0_rgba(255,255,255,0.2)]',
         'transition hover:scale-105 duration-200'
       )}
     >

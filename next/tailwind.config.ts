@@ -10,6 +10,10 @@ const config: Config = {
     './app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   safelist: [
+    'shadow-primary',
+    'shadow-secondary',
+    'border-primary',
+    'border-secondary',
     {
       pattern:
         /^text-(primary|secondary|muted|subdued|grey|brown|green|blue|gold|red|purple|orange|background|border)$/,
@@ -36,6 +40,7 @@ const config: Config = {
         secondary: '#2979FF',
         muted: '#A5A5A5',
         subdued: '#6CAFC1',
+        card: '#2A2D33',
 
         // Greys
         grey: {
@@ -92,7 +97,7 @@ const config: Config = {
         lg: '0px 6px 0px 0px var(--tw-shadow-primary)',
         sm: '0px 2px 0px 0px var(--tw-shadow-primary)',
         primary: `0px 6px 0px 0px var(--tw-shadow-primary)`,
-        secondary: `0px 6px 0px 0px var(--secondary)`,
+        secondary: `0px 6px 0px 0px var(--tw-shadow-secondary)`,
         derek: `0px 0px 0px 1px rgb(0 0 0 / 0.06),
         0px 1px 1px -0.5px rgb(0 0 0 / 0.06),
         0px 3px 3px -1.5px rgb(0 0 0 / 0.06), 

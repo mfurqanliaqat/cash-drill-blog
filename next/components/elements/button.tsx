@@ -30,14 +30,12 @@ export const Button: React.FC<ButtonProps> = ({
 }) => {
   // Compose Tailwind classes dynamically based on color
   // Use 600 for bg, border, and shadow, and white text for contrast
-  const bgClass = `bg-${color}`
-  const borderClass = `border-${color}/70`
   const textClass = 'text-white'
 
   const variantClass =
     variant === 'outline'
-      ? `bg-transparent border-2 ${borderClass} shadow-lg shadow-${color}/70 active:shadow-[0_2px_0_0_var(--tw-shadow-color)] font-extrabold rounded-xl px-8 py-4 text-lg flex items-center justify-center transition-all duration-200 hover:brightness-105 active:translate-y-1 ${textClass}`
-      : `${bgClass} shadow-lg shadow-${color}/70 active:shadow-[0_2px_0_0_var(--tw-shadow-color)] font-extrabold rounded-xl px-8 py-4 text-lg flex items-center justify-center transition-all duration-200 hover:brightness-105 active:translate-y-1 ${textClass}`
+      ? `bg-transparent border-2 border-${color} shadow-lg shadow-${color} active:shadow-[0_2px_0_0_var(--tw-shadow-color)] font-extrabold rounded-xl px-4 py-2 text-lg flex items-center justify-center transition-all duration-200 hover:brightness-105 active:translate-y-1 ${textClass}`
+      : `bg-${color} shadow-lg shadow-${color}/70 active:shadow-[0_2px_0_0_var(--tw-shadow-color)] font-extrabold rounded-xl px-4 py-2 text-lg flex items-center justify-center transition-all duration-200 hover:brightness-105 active:translate-y-1 ${textClass}`
 
   return (
     <Tag className={cn(variantClass, className)} {...props}>

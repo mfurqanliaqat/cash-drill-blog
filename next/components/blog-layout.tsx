@@ -2,21 +2,16 @@
 
 import { useRef } from 'react'
 import {
-  IconArrowLeft,
   IconBrandDiscord,
   IconBrandFacebook,
   IconBrandInstagram,
   IconBrandReddit,
   IconBrandTumblr,
-  IconBrandTwitter,
   IconBrandX,
   IconBrandYoutube,
 } from '@tabler/icons-react'
 import { Container } from './container'
-import Image from 'next/image'
-import { Link } from 'next-view-transitions'
 import { format } from 'date-fns'
-import { strapiImage } from '@/lib/strapi/strapiImage'
 import DynamicZoneManager from './dynamic-zone/manager'
 import { Article } from '@/types/types'
 import { BlogArticleOverview } from './blog-article-overview'
@@ -39,7 +34,7 @@ export function BlogLayout({
   return (
     <>
       <PayoutSliderStrip />
-      <Container className='mt-16 lg:mt-32'>
+      <Container className='mt-16 lg:mt-18'>
         <div className='grid grid-cols-1 lg:grid-cols-12 gap-4'>
           <div className='lg:col-span-9'>
             <BlogArticleOverview article={article} locale={locale} />
