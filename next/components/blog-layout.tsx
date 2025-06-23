@@ -28,20 +28,12 @@ export function BlogLayout({
 
   return (
     <>
-      <div className='flex gap-4'>
-        <Button color='primary'>Primary</Button>
-        <Button color='secondary'>Secondary</Button>
-        <Button variant='outline'>Outline</Button>
-        <Button variant='outline' color='secondary'>
-          Outline Secondary
-        </Button>
-      </div>
-      {/* <PayoutSliderStrip /> */}
+      <PayoutSliderStrip />
       <Container className='mt-16 lg:mt-32'>
         <div className='grid grid-cols-1 lg:grid-cols-12 gap-4'>
           <div className='lg:col-span-9'>
             <BlogArticleOverview article={article} locale={locale} />
-            <div className='bg-background-main border border-border-card rounded-3xl'>
+            <div className='bg-background-main border-4 border-border-card rounded-3xl'>
               <DynamicTOC contentRef={contentRef} />
               <article className='pb-8 pt-8'>
                 <div className='flex items-center justify-center'>

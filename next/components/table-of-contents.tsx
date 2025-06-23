@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
 import { cn } from '@/lib/utils'
 import { TOCItem } from '@/lib/toc'
+import { Progress } from './ui/progress'
 
 interface TableOfContentsProps {
   items: TOCItem[]
@@ -125,7 +126,7 @@ export function TableOfContents({ items, className, contentRef }: TableOfContent
         <div className='container mx-auto px-4'>
           <nav
             ref={navRef}
-            className='flex items-center space-x-6 overflow-x-auto py-3 scrollbar-hide relative'
+            className='flex items-center space-x-6 overflow-x-auto scrollbar-hide relative'
           >
             {items.map(item => (
               <button
@@ -133,24 +134,24 @@ export function TableOfContents({ items, className, contentRef }: TableOfContent
                 ref={activeId === item.id ? activeButtonRef : null}
                 onClick={() => scrollToSection(item.id)}
                 className={cn(
-                  'whitespace-nowrap text-sm font-medium transition-all duration-200 hover:text-neutral-200 px-2 py-1 rounded-md relative z-10',
-                  activeId === item.id
-                    ? 'text-neutral-200 bg-neutral-800/50 border border-b-4 border-green'
-                    : 'text-neutral-400 hover:bg-neutral-800/30'
+                  'whitespace-nowrap font-bold transition-all duration-200 hover:text-neutral-200 px-2 py-4 relative z-10',
+                  activeId === item.id ? 'text-primary' : 'text-muted'
                 )}
               >
                 {item.title}
+                {/* Animated line indicator */}
+                <div
+                  className={cn(
+                    'absolute top-0 left-1/2 h-1 bg-primary rounded-full transition-all duration-300 ease-out transform -translate-x-1/2',
+                    activeId === item.id ? 'w-full opacity-100' : 'w-0 opacity-0'
+                  )}
+                />
               </button>
             ))}
           </nav>
         </div>
         {/* Progress bar directly below header */}
-        <div className='w-full h-1 bg-background-card'>
-          <div
-            className='h-full bg-green transition-all duration-300 ease-out'
-            style={{ width: `${progressWidth}%` }}
-          />
-        </div>
+        <Progress value={progressWidth} className='h-1' color='primary' />
       </div>
     </>
   )
