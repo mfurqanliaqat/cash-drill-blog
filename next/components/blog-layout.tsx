@@ -1,7 +1,17 @@
 'use client'
 
 import { useRef } from 'react'
-import { IconArrowLeft } from '@tabler/icons-react'
+import {
+  IconArrowLeft,
+  IconBrandDiscord,
+  IconBrandFacebook,
+  IconBrandInstagram,
+  IconBrandReddit,
+  IconBrandTumblr,
+  IconBrandTwitter,
+  IconBrandX,
+  IconBrandYoutube,
+} from '@tabler/icons-react'
 import { Container } from './container'
 import Image from 'next/image'
 import { Link } from 'next-view-transitions'
@@ -53,8 +63,32 @@ export function BlogLayout({
             </div>
           </div>
           <div className='lg:col-span-3'>
-            <div className='sticky top-2 rounded-3xl'>
+            <div className='sticky top-2 rounded-3xl flex flex-col items-center justify-center gap-4'>
               <SpinWheel />
+              <h1 className='font-bold text-muted'>SHARE THIS ARTICLE</h1>
+              <div className='flex gap-4 w-full flex-wrap items-center justify-center'>
+                <Button variant='outline' className='p-2'>
+                  <IconBrandX />
+                </Button>
+                <Button variant='outline' className='p-2'>
+                  <IconBrandFacebook />
+                </Button>
+                <Button variant='outline' className='p-2'>
+                  <IconBrandInstagram />
+                </Button>
+                <Button variant='outline' className='p-2'>
+                  <IconBrandReddit />
+                </Button>
+                <Button variant='outline' className='p-2'>
+                  <IconBrandDiscord />
+                </Button>
+                <Button variant='outline' className='p-2'>
+                  <IconBrandYoutube />
+                </Button>
+                <Button variant='outline' className='p-2'>
+                  <IconBrandTumblr />
+                </Button>
+              </div>
             </div>
           </div>
         </div>

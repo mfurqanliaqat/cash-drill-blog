@@ -10,23 +10,23 @@ const config: Config = {
     './app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   safelist: [
-    'bg-primary',
-    'bg-secondary',
-    'border-primary',
-    'border-secondary',
-    'text-primary',
-    'text-secondary',
-    'shadow-primary',
-    'shadow-secondary',
+    {
+      pattern:
+        /^text-(primary|secondary|muted|subdued|grey|brown|green|blue|gold|red|purple|orange|background|border)$/,
+    },
+    {
+      pattern:
+        /^bg-(primary|secondary|muted|subdued|grey|brown|green|blue|gold|red|purple|orange|background|border)$/,
+    },
     // Shadow opacity variants
     {
       pattern:
-        /^shadow-(primary|secondary)\/(5|10|15|20|25|30|35|40|45|50|55|60|65|70|75|80|85|90|95)$/,
+        /^shadow-(primary|secondary|muted|subdued|grey|brown|green|blue|gold|red|purple|orange|background|border)\/(5|10|15|20|25|30|35|40|45|50|55|60|65|70|75|80|85|90|95)$/,
     },
     // Border opacity variants
     {
       pattern:
-        /^border-(primary|secondary)\/(5|10|15|20|25|30|35|40|45|50|55|60|65|70|75|80|85|90|95)$/,
+        /^border-(primary|secondary|muted|subdued|grey|brown|green|blue|gold|red|purple|orange|background|border)\/(5|10|15|20|25|30|35|40|45|50|55|60|65|70|75|80|85|90|95)$/,
     },
   ],
   theme: {
@@ -35,6 +35,7 @@ const config: Config = {
         primary: '#00E676',
         secondary: '#2979FF',
         muted: '#A5A5A5',
+        subdued: '#6CAFC1',
 
         // Greys
         grey: {
