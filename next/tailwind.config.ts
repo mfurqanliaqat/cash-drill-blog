@@ -9,9 +9,33 @@ const config: Config = {
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
+  safelist: [
+    'bg-primary',
+    'bg-secondary',
+    'border-primary',
+    'border-secondary',
+    'text-primary',
+    'text-secondary',
+    'shadow-primary',
+    'shadow-secondary',
+    // Shadow opacity variants
+    {
+      pattern:
+        /^shadow-(primary|secondary)\/(5|10|15|20|25|30|35|40|45|50|55|60|65|70|75|80|85|90|95)$/,
+    },
+    // Border opacity variants
+    {
+      pattern:
+        /^border-(primary|secondary)\/(5|10|15|20|25|30|35|40|45|50|55|60|65|70|75|80|85|90|95)$/,
+    },
+  ],
   theme: {
     extend: {
       colors: {
+        primary: '#00E676',
+        secondary: '#2979FF',
+        muted: '#A5A5A5',
+
         // Greys
         grey: {
           60: '#999999',
@@ -64,6 +88,10 @@ const config: Config = {
         },
       },
       boxShadow: {
+        lg: '0px 6px 0px 0px var(--tw-shadow-primary)',
+        sm: '0px 2px 0px 0px var(--tw-shadow-primary)',
+        primary: `0px 6px 0px 0px var(--tw-shadow-primary)`,
+        secondary: `0px 6px 0px 0px var(--secondary)`,
         derek: `0px 0px 0px 1px rgb(0 0 0 / 0.06),
         0px 1px 1px -0.5px rgb(0 0 0 / 0.06),
         0px 3px 3px -1.5px rgb(0 0 0 / 0.06), 

@@ -13,6 +13,7 @@ import { BlogArticleOverview } from './blog-article-overview'
 import { DynamicTOC } from './dynamic-toc'
 import SpinWheel from './widgets/spin-wheel'
 import PayoutSliderStrip from './payout-slider-strip'
+import { Button } from './elements/button'
 
 export function BlogLayout({
   article,
@@ -27,6 +28,14 @@ export function BlogLayout({
 
   return (
     <>
+      <div className='flex gap-4'>
+        <Button color='primary'>Primary</Button>
+        <Button color='secondary'>Secondary</Button>
+        <Button variant='outline'>Outline</Button>
+        <Button variant='outline' color='secondary'>
+          Outline Secondary
+        </Button>
+      </div>
       {/* <PayoutSliderStrip /> */}
       <Container className='mt-16 lg:mt-32'>
         <div className='grid grid-cols-1 lg:grid-cols-12 gap-4'>

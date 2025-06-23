@@ -1,43 +1,65 @@
-import { cn } from "@/lib/utils";
-import React from "react";
-import { LinkProps } from "next/link"; // Or from your routing library
+import { cn } from '@/lib/utils'
+import React from 'react'
+import { LinkProps } from 'next/link' // Or from your routing library
 
-interface ButtonProps extends React.ComponentPropsWithoutRef<"button"> {
-  variant?: "simple" | "outline" | "primary" | "muted";
-  as?: React.ElementType;
-  className?: string;
-  children?: React.ReactNode;
-  href?: LinkProps["href"];
-  onClick?: () => void;
+interface ButtonProps extends React.ComponentPropsWithoutRef<'button'> {
+  variant?: 'default' | 'outline'
+  /**
+   * Tailwind color name (e.g., 'green', 'red', 'blue', 'yellow', etc.)
+   * Will be used to generate bg, border, and shadow classes.
+   */
+  color?: string
+  as?: React.ElementType
+  className?: string
+  children?: React.ReactNode
+  href?: LinkProps['href']
+  onClick?: () => void
+  leftIcon?: React.ReactNode
+  rightIcon?: React.ReactNode
 }
 
 export const Button: React.FC<ButtonProps> = ({
-  variant = "primary",
-  as: Tag = "button",
+  variant = 'default',
+  color = 'primary',
+  as: Tag = 'button',
   className,
   children,
+  leftIcon,
+  rightIcon,
   ...props
 }) => {
+  // Compose Tailwind classes dynamically based on color
+  // Use 600 for bg, border, and shadow, and white text for contrast
+  const bgClass = `bg-${color}`
+  const borderClass = `border-${color}/70`
+  const textClass = 'text-white'
+
   const variantClass =
-    variant === "simple"
-      ? "bg-secondary relative z-10 bg-transparent hover:border-secondary/50 hover:bg-secondary/10  border border-transparent text-white text-sm md:text-sm transition font-medium duration-200  rounded-md px-4 py-2  flex items-center justify-center"
-      : variant === "outline"
-      ? "bg-white relative z-10 hover:bg-secondary/90 hover:shadow-xl  text-black border border-black hover:text-black text-sm md:text-sm transition font-medium duration-200  rounded-md px-4 py-2  flex items-center justify-center"
-      : variant === "primary"
-      ? "bg-secondary relative z-10 hover:bg-secondary/90  border border-secondary text-black text-sm md:text-sm transition font-medium duration-200  rounded-md px-4 py-2  flex items-center justify-center shadow-[0px_-1px_0px_0px_#FFFFFF60_inset,_0px_1px_0px_0px_#FFFFFF60_inset  hover:-translate-y-1 active:-translate-y-0"
-      : variant === "muted"
-      ? "bg-neutral-800 relative z-10 hover:bg-neutral-900  border border-transparent text-white text-sm md:text-sm transition font-medium duration-200  rounded-md px-4 py-2  flex items-center justify-center shadow-[0px_1px_0px_0px_#FFFFFF20_inset]"
-      : "";
+    variant === 'outline'
+      ? `bg-transparent border-2 ${borderClass} shadow-lg shadow-${color}/70 active:shadow-[0_2px_0_0_var(--tw-shadow-color)] font-extrabold rounded-xl px-8 py-4 text-lg flex items-center justify-center transition-all duration-200 hover:brightness-105 active:translate-y-1 ${textClass}`
+      : `${bgClass} shadow-lg shadow-${color}/70 active:shadow-[0_2px_0_0_var(--tw-shadow-color)] font-extrabold rounded-xl px-8 py-4 text-lg flex items-center justify-center transition-all duration-200 hover:brightness-105 active:translate-y-1 ${textClass}`
+
   return (
-    <Tag
-      className={cn(
-        "bg-secondary relative z-10 bg-transparent hover:border-secondary hover:bg-secondary/50  border border-transparent text-white text-sm md:text-sm transition font-medium duration-200  rounded-md px-4 py-2  flex items-center justify-center ",
-        variantClass,
-        className
-      )}
-      {...props}
-    >
-      {children ?? `Get Started`}
+    <Tag className={cn(variantClass, className)} {...props}>
+      {leftIcon && <span className='mr-2 flex items-center'>{leftIcon}</span>}
+      <span className='flex items-center gap-2'>{children}</span>
+      {rightIcon && <span className='ml-2 flex items-center'>{rightIcon}</span>}
     </Tag>
-  );
-};
+  )
+}
+
+// Helper to get Tailwind hex color for a given color and shade
+function getTailwindHex(color: string, shade: number): string {
+  // You can expand this map as needed
+  const map: Record<string, Record<number, string>> = {
+    green: { 600: '16a34a' },
+    red: { 600: 'dc2626' },
+    blue: { 600: '2563eb' },
+    yellow: { 600: 'ca8a04' },
+    purple: { 600: '7c3aed' },
+    pink: { 600: 'db2777' },
+    gray: { 600: '4b5563' },
+    // Add more as needed
+  }
+  return map[color]?.[shade] || '16a34a' // fallback to green
+}
