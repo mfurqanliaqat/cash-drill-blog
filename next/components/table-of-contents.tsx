@@ -17,14 +17,6 @@ export function TableOfContents({ items, className, contentRef }: TableOfContent
   const activeButtonRef = useRef<HTMLButtonElement>(null)
   const scrollTimeoutRef = useRef<NodeJS.Timeout>()
 
-  // Debounced scroll function
-  const debouncedScroll = useCallback((callback: () => void, delay: number) => {
-    if (scrollTimeoutRef.current) {
-      clearTimeout(scrollTimeoutRef.current)
-    }
-    scrollTimeoutRef.current = setTimeout(callback, delay)
-  }, [])
-
   // Update scroll progress bar (vertical scroll)
   useEffect(() => {
     const handleScroll = () => {
@@ -103,7 +95,7 @@ export function TableOfContents({ items, className, contentRef }: TableOfContent
     if (Math.abs(scrollOffset) > 30) {
       nav.scrollTo({
         left: nav.scrollLeft + scrollOffset,
-        behavior: 'smooth'
+        behavior: 'smooth',
       })
     }
   }, [activeId])
@@ -117,7 +109,7 @@ export function TableOfContents({ items, className, contentRef }: TableOfContent
 
       window.scrollTo({
         top: offsetPosition,
-        behavior: 'smooth'
+        behavior: 'smooth',
       })
     }
   }
@@ -126,14 +118,14 @@ export function TableOfContents({ items, className, contentRef }: TableOfContent
     <>
       <div
         className={cn(
-          'sticky top-0 z-40 bg-neutral-900/95 backdrop-blur-sm border-b border-neutral-800 shadow-sm',
+          'sticky top-0 z-40 bg-background-header backdrop-blur-sm border-b border-border-card shadow-sm rounded-t-3xl',
           className
         )}
       >
-        <div className="container mx-auto px-4">
+        <div className='container mx-auto px-4'>
           <nav
             ref={navRef}
-            className="flex items-center space-x-6 overflow-x-auto py-3 scrollbar-hide relative"
+            className='flex items-center space-x-6 overflow-x-auto py-3 scrollbar-hide relative'
           >
             {items.map(item => (
               <button
@@ -143,7 +135,7 @@ export function TableOfContents({ items, className, contentRef }: TableOfContent
                 className={cn(
                   'whitespace-nowrap text-sm font-medium transition-all duration-200 hover:text-neutral-200 px-2 py-1 rounded-md relative z-10',
                   activeId === item.id
-                    ? 'text-neutral-200 bg-neutral-800/50 border-b-2 border-blue-500'
+                    ? 'text-neutral-200 bg-neutral-800/50 border border-b-4 border-green'
                     : 'text-neutral-400 hover:bg-neutral-800/30'
                 )}
               >
@@ -153,9 +145,9 @@ export function TableOfContents({ items, className, contentRef }: TableOfContent
           </nav>
         </div>
         {/* Progress bar directly below header */}
-        <div className="w-full h-1 bg-neutral-700">
+        <div className='w-full h-1 bg-background-card'>
           <div
-            className="h-full bg-blue-500 transition-all duration-300 ease-out"
+            className='h-full bg-green transition-all duration-300 ease-out'
             style={{ width: `${progressWidth}%` }}
           />
         </div>

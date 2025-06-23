@@ -36,7 +36,7 @@ export function DynamicTOC({ contentRef, className }: DynamicTOCProps) {
         items.push({
           id,
           title,
-          level
+          level,
         })
       })
 
@@ -55,7 +55,7 @@ export function DynamicTOC({ contentRef, className }: DynamicTOCProps) {
 
     observer.observe(contentRef.current, {
       childList: true,
-      subtree: true
+      subtree: true,
     })
 
     return () => observer.disconnect()

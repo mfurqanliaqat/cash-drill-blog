@@ -102,9 +102,9 @@ export const BlogCardVertical = ({ article, locale }: { article: Article; locale
           <div className='flex gap-4 flex-wrap mb-4 items-center font-bold text-secondary/70'>
             {format(new Date(article.publishedAt), 'dd.MM.yyyy')}
             <div className='h-5 rounded-lg w-0.5 bg-neutral-700' />
-            {article.author.name}
+            <span className='hover:text-green'>{article.author.name}</span>
           </div>
-          <p className='text-lg md:text-xl font-bold mb-4 hover:text-success transition duration-200'>
+          <p className='text-lg md:text-xl font-bold mb-4 hover:text-green transition duration-200'>
             <Balancer>{article.title}</Balancer>
           </p>
         </div>

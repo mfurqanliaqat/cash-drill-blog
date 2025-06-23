@@ -14,12 +14,12 @@ import fetchContentType from '@/lib/strapi/fetchContentType'
 const inter = Inter({
   subsets: ['latin'],
   display: 'swap',
-  weight: ['400', '500', '600', '700', '800', '900']
+  weight: ['400', '500', '600', '700', '800', '900'],
 })
 
 // Default Global SEO for pages without them
 export async function generateMetadata({
-  params
+  params,
 }: {
   params: { locale: string; slug: string }
 }): Promise<Metadata> {
@@ -27,7 +27,7 @@ export async function generateMetadata({
     'global',
     {
       filters: { locale: params.locale },
-      populate: 'seo.metaImage'
+      populate: 'seo.metaImage',
     },
     true
   )
@@ -39,7 +39,7 @@ export async function generateMetadata({
 
 export default async function LocaleLayout({
   children,
-  params: { locale }
+  params: { locale },
 }: {
   children: React.ReactNode
   params: { locale: string }
@@ -49,7 +49,7 @@ export default async function LocaleLayout({
     <html lang={locale}>
       <ViewTransitions>
         <CartProvider>
-          <body className={cn(inter.className, 'bg-charcoal antialiased h-full w-full')}>
+          <body className={cn(inter.className, 'bg-background-main antialiased h-full w-full')}>
             <Navbar data={pageData.navbar} locale={locale} />
             {children}
             <Footer data={pageData.footer} locale={locale} />
