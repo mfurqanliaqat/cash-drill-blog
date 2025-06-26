@@ -1,0 +1,42 @@
+{
+  "kind": "collectionType",
+  "collectionName": "payouts",
+  "info": {
+    "singularName": "payout",
+    "pluralName": "payouts",
+    "displayName": "Payouts",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "username": {
+      "type": "string",
+      "required": true
+    },
+    "amount": {
+      "type": "decimal",
+      "required": true
+    },
+    "currency": {
+      "type": "enumeration",
+      "enum": [
+        "USD",
+        "EUR",
+        "CAD"
+      ],
+      "default": "USD"
+    },
+    "payoutMethod": {
+      "type": "enumeration",
+      "enum": [
+        "PayPal",
+        "Amazon",
+        "GooglePlay",
+        "Netflix",
+        "Bank"
+      ]
+    }
+  }
+}

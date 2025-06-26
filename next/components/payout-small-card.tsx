@@ -21,8 +21,8 @@ export const PayoutSmallCard: React.FC<PayoutSmallCardProps> = ({
   return (
     <div
       className={cn(
-        'flex items-center gap-3 bg-neutral-900 rounded-2xl p-1 min-w-fit border-2 border-neutral-700 cursor-pointer select-none shadow-[0_3px_0_0_rgba(255,255,255,0.2)]',
-        'transition hover:scale-105 duration-200'
+        'flex items-center gap-3 rounded-2xl p-1 min-w-fit border-2 border-neutral-700 cursor-pointer select-none shadow-[0_3px_0_0_rgba(255,255,255,0.2)]',
+        'transition duration-200 hover:shadow-primary/70 hover:border-primary/70'
       )}
     >
       <div className='w-10 h-10 rounded-xl overflow-hidden flex items-center justify-center bg-neutral-800'>
@@ -42,8 +42,8 @@ export const PayoutSmallCard: React.FC<PayoutSmallCardProps> = ({
         <div className='text-xs text-neutral-400 leading-none'>{method}</div>
         <div className='truncate text-xs text-white leading-tight'>@{username}</div>
       </div>
-      <div className='flex items-center bg-green/10 rounded-lg p-1 ml-2 '>
-        <span className='text-green font-bold text-base'>${amount.toFixed(2)}</span>
+      <div className='flex items-center bg-primary/20 rounded-lg p-1 ml-2 '>
+        <span className='text-primary font-bold text-base'>${amount.toFixed(2)}</span>
         {/* <span className='ml-1 text-green-400 text-lg font-bold'>|</span> */}
       </div>
     </div>

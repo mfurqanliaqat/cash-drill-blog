@@ -670,6 +670,36 @@ export interface ApiPagePage extends Struct.CollectionTypeSchema {
   }
 }
 
+export interface ApiPayoutPayout extends Struct.CollectionTypeSchema {
+  collectionName: 'payouts'
+  info: {
+    description: ''
+    displayName: 'Payouts'
+    pluralName: 'payouts'
+    singularName: 'payout'
+  }
+  options: {
+    draftAndPublish: true
+  }
+  attributes: {
+    amount: Schema.Attribute.Decimal & Schema.Attribute.Required
+    createdAt: Schema.Attribute.DateTime
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> & Schema.Attribute.Private
+    currency: Schema.Attribute.Enumeration<['USD', 'EUR', 'CAD']> &
+      Schema.Attribute.DefaultTo<'USD'>
+    locale: Schema.Attribute.String & Schema.Attribute.Private
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::payout.payout'> &
+      Schema.Attribute.Private
+    payoutMethod: Schema.Attribute.Enumeration<
+      ['PayPal', 'Amazon', 'GooglePlay', 'Netflix', 'Bank']
+    >
+    publishedAt: Schema.Attribute.DateTime
+    updatedAt: Schema.Attribute.DateTime
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> & Schema.Attribute.Private
+    username: Schema.Attribute.String & Schema.Attribute.Required
+  }
+}
+
 export interface ApiPlanPlan extends Struct.CollectionTypeSchema {
   collectionName: 'plans'
   info: {
@@ -1301,6 +1331,7 @@ declare module '@strapi/strapi' {
       'api::global.global': ApiGlobalGlobal
       'api::logo.logo': ApiLogoLogo
       'api::page.page': ApiPagePage
+      'api::payout.payout': ApiPayoutPayout
       'api::plan.plan': ApiPlanPlan
       'api::product-page.product-page': ApiProductPageProductPage
       'api::product.product': ApiProductProduct
