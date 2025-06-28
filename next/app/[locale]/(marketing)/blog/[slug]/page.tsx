@@ -5,6 +5,9 @@ import fetchContentType from '@/lib/strapi/fetchContentType'
 import { BlocksRenderer } from '@strapi/blocks-react-renderer'
 
 import ClientSlugHandler from '../../ClientSlugHandler'
+import { Button } from '@/components/ui/button'
+import { CTA } from '@/components/widgets/cta'
+import Table from '@/components/widgets/table'
 
 export default async function SingleArticlePage({
   params,
@@ -37,11 +40,23 @@ export default async function SingleArticlePage({
   )
 
   console.log('payouts', payouts)
+  console.log('article', article)
 
   return (
     <BlogLayout article={article} locale={params.locale}>
       <ClientSlugHandler localizedSlugs={localizedSlugs} />
-      <BlocksRenderer content={article.content} />
+      {/* <BlocksRenderer content={article.content} /> */}
+      {article.dynamicContent?.map((block: any, index: number) => {
+        if (block.__component === 'shared.rich-text') {
+          return <BlocksRenderer key={index} content={block.content} />
+        }
+        if (block.__component === 'widgets.cta') {
+          return <CTA key={index} locale={params.locale} {...block} />
+        }
+        if (block.__component === 'widgets.table') {
+          return <Table key={index} {...block} />
+        }
+      })}
     </BlogLayout>
   )
 }

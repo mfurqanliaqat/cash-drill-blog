@@ -410,6 +410,18 @@ export interface SharedPerks extends Struct.ComponentSchema {
   }
 }
 
+export interface SharedRichText extends Struct.ComponentSchema {
+  collectionName: 'components_shared_rich_texts'
+  info: {
+    description: ''
+    displayName: 'Rich Text'
+    icon: 'write'
+  }
+  attributes: {
+    content: Schema.Attribute.Blocks
+  }
+}
+
 export interface SharedSection extends Struct.ComponentSchema {
   collectionName: 'components_shared_sections'
   info: {
@@ -490,6 +502,67 @@ export interface SharedUser extends Struct.ComponentSchema {
   }
 }
 
+export interface TableCell extends Struct.ComponentSchema {
+  collectionName: 'components_table_cells'
+  info: {
+    displayName: 'Cell'
+  }
+  attributes: {
+    content: Schema.Attribute.Text
+  }
+}
+
+export interface TableHeader extends Struct.ComponentSchema {
+  collectionName: 'components_table_headers'
+  info: {
+    description: ''
+    displayName: 'Header'
+  }
+  attributes: {
+    cells: Schema.Attribute.Component<'table.cell', true>
+  }
+}
+
+export interface TableRow extends Struct.ComponentSchema {
+  collectionName: 'components_table_rows'
+  info: {
+    description: ''
+    displayName: 'Row'
+  }
+  attributes: {
+    cells: Schema.Attribute.Component<'table.cell', true>
+  }
+}
+
+export interface WidgetsCta extends Struct.ComponentSchema {
+  collectionName: 'components_widgets_ctas'
+  info: {
+    description: ''
+    displayName: 'CTA'
+    icon: 'cursor'
+  }
+  attributes: {
+    target: Schema.Attribute.Enumeration<['_blank', '_self', '_parent', '_top']>
+    text: Schema.Attribute.String & Schema.Attribute.Required
+    URL: Schema.Attribute.String
+    variant: Schema.Attribute.Enumeration<['default', 'online']>
+  }
+}
+
+export interface WidgetsTable extends Struct.ComponentSchema {
+  collectionName: 'components_widgets_tables'
+  info: {
+    description: ''
+    displayName: 'Table'
+    icon: 'apps'
+  }
+  attributes: {
+    header: Schema.Attribute.Component<'table.header', false>
+    heading: Schema.Attribute.String
+    rows: Schema.Attribute.Component<'table.row', true>
+  }
+}
+
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
@@ -520,11 +593,17 @@ declare module '@strapi/strapi' {
       'shared.launches': SharedLaunches
       'shared.link': SharedLink
       'shared.perks': SharedPerks
+      'shared.rich-text': SharedRichText
       'shared.section': SharedSection
       'shared.seo': SharedSeo
       'shared.social-media-icon-links': SharedSocialMediaIconLinks
       'shared.steps': SharedSteps
       'shared.user': SharedUser
+      'table.cell': TableCell
+      'table.header': TableHeader
+      'table.row': TableRow
+      'widgets.cta': WidgetsCta
+      'widgets.table': WidgetsTable
     }
   }
 }

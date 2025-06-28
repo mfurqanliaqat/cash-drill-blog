@@ -105,6 +105,19 @@
       "type": "relation",
       "relation": "oneToOne",
       "target": "plugin::users-permissions.user"
+    },
+    "dynamicContent": {
+      "type": "dynamiczone",
+      "components": [
+        "shared.rich-text",
+        "widgets.cta",
+        "widgets.table"
+      ],
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     }
   }
 }

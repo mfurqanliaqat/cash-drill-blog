@@ -1,0 +1,12 @@
+{
+  "collectionName": "components_table_cells",
+  "info": {
+    "displayName": "Cell"
+  },
+  "options": {},
+  "attributes": {
+    "content": {
+      "type": "text"
+    }
+  }
+}

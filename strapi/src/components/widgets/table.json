@@ -1,0 +1,24 @@
+{
+  "collectionName": "components_widgets_tables",
+  "info": {
+    "displayName": "Table",
+    "icon": "apps",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "heading": {
+      "type": "string"
+    },
+    "header": {
+      "type": "component",
+      "repeatable": false,
+      "component": "table.header"
+    },
+    "rows": {
+      "type": "component",
+      "repeatable": true,
+      "component": "table.row"
+    }
+  }
+}

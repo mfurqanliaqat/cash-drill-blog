@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Slot } from '@radix-ui/react-slot'
 import { cva, type VariantProps } from 'class-variance-authority'
-
+import Link from 'next/link'
 import { cn } from '@/lib/utils'
 
 const buttonVariants = cva(
@@ -46,25 +46,42 @@ export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
   asChild?: boolean
+  href?: string
+  target?: '_blank' | '_self'
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, color, asChild = false, ...props }, ref) => {
-    const Comp = asChild ? Slot : 'button'
-    return (
-      <Comp
-        className={cn(
-          buttonVariants({
-            variant,
-            size,
-            colorVariant: color as 'primary' | 'secondary',
-            className,
-          })
-        )}
-        ref={ref}
-        {...props}
-      />
+  ({ className, variant, size, color, asChild = false, href, target, ...props }, ref) => {
+    const buttonClassName = cn(
+      buttonVariants({
+        variant,
+        size,
+        colorVariant: color as 'primary' | 'secondary',
+        className,
+      })
     )
+
+    if (href) {
+      // For links, render as Link component
+      return (
+        <Link
+          href={href}
+          target={target}
+          className={buttonClassName}
+          onClick={props.onClick as unknown as React.MouseEventHandler<HTMLAnchorElement>}
+          id={props.id}
+          style={{ textDecoration: 'none', ...props.style }}
+          role={props.role}
+          tabIndex={props.tabIndex}
+        >
+          {props.children}
+        </Link>
+      )
+    }
+
+    // For buttons, render as button element
+    const Comp = asChild ? Slot : 'button'
+    return <Comp className={buttonClassName} ref={ref} {...props} />
   }
 )
 Button.displayName = 'Button'
