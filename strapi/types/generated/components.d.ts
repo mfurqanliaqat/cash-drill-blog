@@ -512,6 +512,18 @@ export interface TableCell extends Struct.ComponentSchema {
   }
 }
 
+export interface TableComparisonPair extends Struct.ComponentSchema {
+  collectionName: 'components_table_comparison_pairs'
+  info: {
+    description: ''
+    displayName: 'Comparison Pair'
+  }
+  attributes: {
+    left: Schema.Attribute.String
+    right: Schema.Attribute.String
+  }
+}
+
 export interface TableHeader extends Struct.ComponentSchema {
   collectionName: 'components_table_headers'
   info: {
@@ -531,6 +543,19 @@ export interface TableRow extends Struct.ComponentSchema {
   }
   attributes: {
     cells: Schema.Attribute.Component<'table.cell', true>
+  }
+}
+
+export interface WidgetsComparisonTable extends Struct.ComponentSchema {
+  collectionName: 'components_widgets_comparison_tables'
+  info: {
+    description: ''
+    displayName: 'Comparison Table'
+  }
+  attributes: {
+    header: Schema.Attribute.Component<'table.comparison-pair', false>
+    heading: Schema.Attribute.String
+    rows: Schema.Attribute.Component<'table.comparison-pair', true>
   }
 }
 
@@ -600,8 +625,10 @@ declare module '@strapi/strapi' {
       'shared.steps': SharedSteps
       'shared.user': SharedUser
       'table.cell': TableCell
+      'table.comparison-pair': TableComparisonPair
       'table.header': TableHeader
       'table.row': TableRow
+      'widgets.comparison-table': WidgetsComparisonTable
       'widgets.cta': WidgetsCta
       'widgets.table': WidgetsTable
     }

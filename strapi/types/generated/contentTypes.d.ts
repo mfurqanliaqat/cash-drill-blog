@@ -376,7 +376,7 @@ export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
         }
       }>
     dynamicContent: Schema.Attribute.DynamicZone<
-      ['shared.rich-text', 'widgets.cta', 'widgets.table']
+      ['shared.rich-text', 'widgets.cta', 'widgets.table', 'widgets.comparison-table']
     > &
       Schema.Attribute.SetPluginOptions<{
         i18n: {

@@ -14,7 +14,7 @@ const buttonVariants = cva(
         destructive:
           'bg-error shadow-lg shadow-error/70 active:shadow-[0_2px_0_0_var(--tw-shadow-color)] font-extrabold rounded-xl px-4 py-2 text-lg flex items-center justify-center transition-all duration-200 hover:brightness-105 active:translate-y-1',
         outline:
-          'bg-transparent border-2 font-extrabold rounded-xl px-4 py-2 text-lg flex items-center justify-center transition-all duration-200 hover:brightness-105 active:translate-y-1 border-[var(--button-border)] text-[var(--button-text)] shadow-lg shadow-[var(--button-outline-shadow)] active:shadow-[0_2px_0_0_var(--button-outline-shadow)]',
+          'bg-transparent border-2 font-extrabold rounded-xl px-4 py-2 text-lg flex items-center justify-center transition-all duration-200 hover:brightness-105 active:translate-y-1 border-[var(--button-border)] text-white shadow-lg shadow-[var(--button-shadow)] active:shadow-[0_2px_0_0_var(--button-outline-shadow)]',
         secondary:
           'bg-secondary shadow-lg shadow-secondary/70 active:shadow-[0_2px_0_0_var(--tw-shadow-color)] font-extrabold rounded-xl px-4 py-2 text-lg flex items-center justify-center transition-all duration-200 hover:brightness-105 active:translate-y-1',
         ghost:
@@ -29,9 +29,9 @@ const buttonVariants = cva(
       },
       colorVariant: {
         primary:
-          '[--button-bg:theme(colors.primary)] [--button-text:white] [--button-border:theme(colors.primary)] [--button-shadow:theme(colors.primary/0.7)] [--button-outline-shadow:theme(colors.primary)]',
+          '[--button-bg:theme(colors.primary)] [--button-text:black] [--button-border:theme(colors.primary)] [--button-shadow:theme(colors.primary/0.4)] [--button-outline-shadow:theme(colors.primary)]',
         secondary:
-          '[--button-bg:theme(colors.secondary)] [--button-text:white] [--button-border:theme(colors.secondary)] [--button-shadow:theme(colors.secondary/0.7)] [--button-outline-shadow:theme(colors.secondary)]',
+          '[--button-bg:theme(colors.secondary)] [--button-text:black] [--button-border:theme(colors.secondary)] [--button-shadow:theme(colors.secondary/0.7)] [--button-outline-shadow:theme(colors.secondary)]',
       },
     },
     defaultVariants: {

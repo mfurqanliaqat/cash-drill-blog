@@ -72,21 +72,13 @@
         }
       },
       "type": "dynamiczone",
-      "components": [
-        "dynamic-zone.related-articles",
-        "dynamic-zone.cta"
-      ]
+      "components": ["dynamic-zone.related-articles", "dynamic-zone.cta"]
     },
     "image": {
       "type": "media",
       "multiple": false,
       "required": false,
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ],
+      "allowedTypes": ["images", "files", "videos", "audios"],
       "pluginOptions": {
         "i18n": {
           "localized": true
@@ -111,7 +103,8 @@
       "components": [
         "shared.rich-text",
         "widgets.cta",
-        "widgets.table"
+        "widgets.table",
+        "widgets.comparison-table"
       ],
       "pluginOptions": {
         "i18n": {

@@ -7,7 +7,9 @@ import { BlocksRenderer } from '@strapi/blocks-react-renderer'
 import ClientSlugHandler from '../../ClientSlugHandler'
 import { Button } from '@/components/ui/button'
 import { CTA } from '@/components/widgets/cta'
-import Table from '@/components/widgets/table'
+import Table from '@/components/widgets/data-table'
+import ComparisonTable from '@/components/widgets/comparison-table'
+import EarningEstimate from '@/components/widgets/earning-estimate'
 
 export default async function SingleArticlePage({
   params,
@@ -56,7 +58,14 @@ export default async function SingleArticlePage({
         if (block.__component === 'widgets.table') {
           return <Table key={index} {...block} />
         }
+        if (block.__component === 'widgets.comparison-table') {
+          return <ComparisonTable key={index} {...block} />
+        }
+        if (block.__component === 'widgets.earning-estimate') {
+          return <EarningEstimate key={index} {...block} />
+        }
       })}
+      <EarningEstimate />
     </BlogLayout>
   )
 }

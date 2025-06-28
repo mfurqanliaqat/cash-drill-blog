@@ -36,12 +36,12 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        primary: '#00E676',
-        secondary: '#2979FF',
+        primary: '#62F098',
+        secondary: '#377BF5',
         muted: '#A5A5A5',
         subdued: '#6CAFC1',
         card: '#2A2D33',
-        error: '#FF0000',
+        error: '#ef4444',
         // Greys
         grey: {
           60: '#999999',

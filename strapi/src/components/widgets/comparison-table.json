@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_widgets_comparison_tables",
+  "info": {
+    "displayName": "Comparison Table",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "rows": {
+      "type": "component",
+      "repeatable": true,
+      "component": "table.comparison-pair"
+    },
+    "heading": {
+      "type": "string"
+    },
+    "header": {
+      "type": "component",
+      "repeatable": false,
+      "component": "table.comparison-pair"
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_table_comparison_pairs",
+  "info": {
+    "displayName": "Comparison Pair",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "left": {
+      "type": "string"
+    },
+    "right": {
+      "type": "string"
+    }
+  }
+}
