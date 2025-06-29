@@ -61,11 +61,11 @@ export default async function SingleArticlePage({
         if (block.__component === 'widgets.comparison-table') {
           return <ComparisonTable key={index} {...block} />
         }
-        if (block.__component === 'widgets.earning-estimate') {
+        if (block.__component === 'widgets.estimation-bar-chart') {
           return <EarningEstimate key={index} {...block} />
         }
       })}
-      <EarningEstimate />
+      {/* <EarningEstimate /> */}
     </BlogLayout>
   )
 }

@@ -1,0 +1,26 @@
+{
+  "collectionName": "components_shared_range_bars",
+  "info": {
+    "displayName": "Range Bar",
+    "icon": "connector"
+  },
+  "options": {},
+  "attributes": {
+    "heading": {
+      "type": "string"
+    },
+    "min": {
+      "type": "decimal",
+      "required": true,
+      "min": 0
+    },
+    "max": {
+      "type": "decimal",
+      "min": 0,
+      "default": 100
+    },
+    "hexColor": {
+      "type": "string"
+    }
+  }
+}

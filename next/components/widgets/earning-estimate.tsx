@@ -11,7 +11,7 @@ const CASH_DRILL_RATE = 108.2 / 240 // ≈ 0.451
 const AVERAGE_RATE = 36.0 / 240 // = 0.15
 const MAX_CASH_DRILL = 108.2
 
-function EarningEstimate() {
+function EarningEstimate({ heading, caption, sliderText }: any) {
   const [minutes, setMinutes] = useState(210)
 
   // Calculate earnings
@@ -27,16 +27,12 @@ function EarningEstimate() {
       {/* Left Side */}
       <div className='flex-1 flex flex-col justify-between'>
         <div className='space-y-4 mb-20'>
-          <h2 className='text-2xl font-semibold leading-tight text-white'>
-            How Much Can You Really Earn Chatting Online?
-          </h2>
-          <p className='text-muted text-base'>
-            CashDrill compared to alternative ways to get paid to chat
-          </p>
+          <h2 className='text-2xl font-semibold leading-tight text-white'>{heading}</h2>
+          <p className='text-muted text-base'>{caption}</p>
         </div>
         <div className='mb-8'>
-          <label className='block text-muted text-base mb-2'>Minutes using CashDrill:</label>
-          <div className='relative w-full h-14 flex items-center'>
+          <label className='block text-muted text-base mb-3'>{sliderText}</label>
+          <div className='relative w-full flex items-center'>
             {/* Custom slider track */}
             <div className='absolute left-0 right-0 top-1/2 -translate-y-1/2 h-2 rounded-lg bg-[#23243a] w-full'></div>
             <div
@@ -107,7 +103,7 @@ function EarningEstimate() {
                     window.addEventListener('touchend', onUp)
                   }}
                 >
-                  <span className='px-4 py-2 rounded-full bg-white text-black font-bold text-xs shadow text-center pointer-events-none whitespace-nowrap'>
+                  <span className='px-3 py-2 rounded-full bg-white text-black text-sm shadow text-center pointer-events-none whitespace-nowrap'>
                     {minutes} min
                   </span>
                 </div>

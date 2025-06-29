@@ -410,6 +410,34 @@ export interface SharedPerks extends Struct.ComponentSchema {
   }
 }
 
+export interface SharedRangeBar extends Struct.ComponentSchema {
+  collectionName: 'components_shared_range_bars'
+  info: {
+    displayName: 'Range Bar'
+    icon: 'connector'
+  }
+  attributes: {
+    heading: Schema.Attribute.String
+    hexColor: Schema.Attribute.String
+    max: Schema.Attribute.Decimal &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 0
+        },
+        number
+      > &
+      Schema.Attribute.DefaultTo<100>
+    min: Schema.Attribute.Decimal &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 0
+        },
+        number
+      >
+  }
+}
+
 export interface SharedRichText extends Struct.ComponentSchema {
   collectionName: 'components_shared_rich_texts'
   info: {
@@ -574,6 +602,38 @@ export interface WidgetsCta extends Struct.ComponentSchema {
   }
 }
 
+export interface WidgetsEstimationBarChart extends Struct.ComponentSchema {
+  collectionName: 'components_widgets_estimation_bar_charts'
+  info: {
+    description: ''
+    displayName: 'Estimation Bar Chart'
+    icon: 'layout'
+  }
+  attributes: {
+    bars: Schema.Attribute.Component<'shared.range-bar', true>
+    caption: Schema.Attribute.String
+    heading: Schema.Attribute.String
+    sliderMax: Schema.Attribute.Integer &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 0
+        },
+        number
+      > &
+      Schema.Attribute.DefaultTo<0>
+    sliderMin: Schema.Attribute.Integer &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 0
+        },
+        number
+      > &
+      Schema.Attribute.DefaultTo<0>
+    sliderText: Schema.Attribute.String
+    sliderUnit: Schema.Attribute.String
+  }
+}
+
 export interface WidgetsTable extends Struct.ComponentSchema {
   collectionName: 'components_widgets_tables'
   info: {
@@ -618,6 +678,7 @@ declare module '@strapi/strapi' {
       'shared.launches': SharedLaunches
       'shared.link': SharedLink
       'shared.perks': SharedPerks
+      'shared.range-bar': SharedRangeBar
       'shared.rich-text': SharedRichText
       'shared.section': SharedSection
       'shared.seo': SharedSeo
@@ -630,6 +691,7 @@ declare module '@strapi/strapi' {
       'table.row': TableRow
       'widgets.comparison-table': WidgetsComparisonTable
       'widgets.cta': WidgetsCta
+      'widgets.estimation-bar-chart': WidgetsEstimationBarChart
       'widgets.table': WidgetsTable
     }
   }

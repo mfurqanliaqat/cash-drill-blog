@@ -1,0 +1,39 @@
+{
+  "collectionName": "components_widgets_estimation_bar_charts",
+  "info": {
+    "displayName": "Estimation Bar Chart",
+    "icon": "layout",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "heading": {
+      "type": "string"
+    },
+    "caption": {
+      "type": "string"
+    },
+    "sliderText": {
+      "type": "string"
+    },
+    "sliderUnit": {
+      "type": "string"
+    },
+    "sliderMin": {
+      "type": "integer",
+      "min": 0,
+      "default": 0
+    },
+    "sliderMax": {
+      "type": "integer",
+      "default": 0,
+      "min": 0
+    },
+    "bars": {
+      "displayName": "Range Bar",
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.range-bar"
+    }
+  }
+}
