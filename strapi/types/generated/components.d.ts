@@ -91,12 +91,15 @@ export interface GlobalFooter extends Struct.ComponentSchema {
   }
   attributes: {
     built_with: Schema.Attribute.String
+    business_links: Schema.Attribute.Component<'shared.link', true>
     copyright: Schema.Attribute.String
     description: Schema.Attribute.String
     designed_developed_by: Schema.Attribute.String
+    earning_links: Schema.Attribute.Component<'shared.link', true>
     internal_links: Schema.Attribute.Component<'shared.link', true>
     logo: Schema.Attribute.Relation<'oneToOne', 'api::logo.logo'>
     policy_links: Schema.Attribute.Component<'shared.link', true>
+    resource_links: Schema.Attribute.Component<'shared.link', true>
     social_media_links: Schema.Attribute.Component<'shared.link', true>
   }
 }

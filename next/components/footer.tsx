@@ -1,74 +1,63 @@
 import React from 'react'
 import { Logo } from '@/components/logo'
 import { Link } from 'next-view-transitions'
+import { Container } from './container'
 
 export const Footer = async ({ data, locale }: { data: any; locale: string }) => {
   return (
-    <div className="relative">
-      <div className="border-t border-neutral-900 px-8 pt-20 pb-32 relative">
-        <div className="max-w-7xl mx-auto text-sm text-neutral-500 flex sm:flex-row flex-col justify-between items-start ">
-          <div>
-            <div className="mr-4  md:flex mb-4">
+    <div className='relative'>
+      <Container className='border-t-4 border-card pt-20 pb-5 flex flex-col gap-10'>
+        <div className='flex sm:flex-row flex-col justify-between items-start gap-20'>
+          <div className='flex flex-col gap-4 md:w-1/3'>
+            <div className='mr-4  md:flex mb-4'>
               {data?.logo?.image && <Logo image={data?.logo?.image} />}
             </div>
-            <div className="max-w-xs">{data?.description}</div>
-            <div className="mt-4">{data?.copyright}</div>
-            <div className="mt-10">
-              Designed and Developed by{' '}
-              <a className="text-white underline" href="https://aceternity.com">
-                Aceternity
-              </a>{' '}
-              &{' '}
-              <a className="text-white underline" href="https://strapi.io">
-                Strapi
-              </a>
-            </div>
-            <div className="mt-2">
-              built with{' '}
-              <a className="text-white underline" href="https://strapi.io">
-                Strapi
-              </a>
-              ,{' '}
-              <a className="text-white underline" href="https://nextjs.org">
-                Next.js
-              </a>
-              ,{' '}
-              <a className="text-white underline" href="https://tailwindcss.com">
-                Tailwind CSS
-              </a>
-              ,{' '}
-              <a className="text-white underline" href="https://framer.com/motion">
-                Motion Animation Lib
-              </a>
-              , and{' '}
-              <a className="text-white underline" href="https://ui.aceternity.com">
-                Aceternity UI
-              </a>
-            </div>
+            <div className='max-w-xs text-muted text-sm'>{data?.description}</div>
           </div>
-          <div className="grid grid-cols-3 gap-10 items-start mt-10 md:mt-0">
-            <LinkSection links={data?.internal_links} locale={locale} />
-            <LinkSection links={data?.policy_links} locale={locale} />
-            <LinkSection links={data?.social_media_links} locale={locale} />
+          <div className='grid grid-cols-2 gap-10 items-start mt-10 md:mt-0 md:flex md:flex-row w-full md:justify-between'>
+            <LinkSection links={data?.internal_links || []} locale={locale} />
+            <LinkSection links={data?.resource_links || []} locale={locale} />
+            <LinkSection links={data?.business_links || []} locale={locale} />
+            <LinkSection links={data?.earning_links || []} locale={locale} />
+            {/* <LinkSection links={data?.policy_links || []} locale={locale} /> */}
+            {/* <LinkSection links={data?.social_media_links || []} locale={locale} /> */}
           </div>
         </div>
-      </div>
+        <div className='flex gap-4 items-start mt-10'>
+          <div className='font-semibold'>{data?.copyright}</div>
+          <span className='text-muted opacity-50 select-none'>|</span>
+          {data?.policy_links.map((link: { text: string; URL: string }, index: number) => (
+            <>
+              <Link
+                key={link.text}
+                className='transition-colors hover:text-primary text-muted font-semibold'
+                href={`${link.URL.startsWith('http') ? '' : `/${locale}`}${link.URL}`}
+              >
+                {link.text}
+              </Link>
+              {index < data.policy_links.length - 1 && (
+                <span className='text-muted opacity-50 select-none'>|</span>
+              )}
+            </>
+          ))}
+        </div>
+      </Container>
     </div>
   )
 }
 
 const LinkSection = ({
   links,
-  locale
+  locale,
 }: {
   links: { text: string; URL: never | string }[]
   locale: string
 }) => (
-  <div className="flex justify-center space-y-4 flex-col mt-4">
+  <div className='flex justify-center space-y-4 flex-col mt-4'>
     {links.map(link => (
       <Link
         key={link.text}
-        className="transition-colors hover:text-neutral-400 text-muted text-xs sm:text-sm"
+        className='transition-colors hover:text-primary text-muted font-semibold'
         href={`${link.URL.startsWith('http') ? '' : `/${locale}`}${link.URL}`}
       >
         {link.text}

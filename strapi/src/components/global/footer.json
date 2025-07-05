@@ -38,6 +38,21 @@
       "type": "component",
       "repeatable": true,
       "component": "shared.link"
+    },
+    "resource_links": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.link"
+    },
+    "business_links": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.link"
+    },
+    "earning_links": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.link"
     }
   }
 }

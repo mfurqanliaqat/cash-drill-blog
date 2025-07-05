@@ -12,7 +12,7 @@ import { Article } from '@/types/types'
 export const BlogCard = ({ article, locale }: { article: Article; locale: string }) => {
   return (
     <Link
-      className='shadow-derek grid grid-cols-1 md:grid-cols-2  rounded-3xl group border border-transparent hover:border-neutral-800 w-full hover:bg-neutral-900  overflow-hidden  hover:scale-[1.02] transition duration-200'
+      className='grid grid-cols-1 md:grid-cols-2  rounded-3xl group border border-transparent hover:border-neutral-800 w-full hover:bg-neutral-900  overflow-hidden  hover:scale-[1.02] transition duration-200'
       href={`/${locale}/blog/${article.slug}`}
     >
       <div className=''>
@@ -71,7 +71,7 @@ export const BlogCard = ({ article, locale }: { article: Article; locale: string
 export const BlogCardVertical = ({ article, locale }: { article: Article; locale: string }) => {
   return (
     <Link
-      className='shadow-derek rounded-3xl group border border-transparent w-full  overflow-hidden transition duration-200'
+      className='rounded-3xl group border border-transparent w-full  overflow-hidden transition duration-200'
       href={`/${locale}/blog/${article.slug}`}
     >
       <div className=''>
@@ -104,19 +104,9 @@ export const BlogCardVertical = ({ article, locale }: { article: Article; locale
             <div className='h-5 rounded-lg w-0.5 bg-neutral-700' />
             <span className='hover:text-primary'>{article.author.name}</span>
           </div>
-          <p className='text-lg md:text-xl font-bold mb-4 hover:text-primary transition duration-200'>
+          <p className='text-lg md:text-xl font-bold hover:text-primary transition duration-200'>
             <Balancer>{article.title}</Balancer>
           </p>
-        </div>
-        <div className='flex space-x-2 items-center  mt-6'>
-          {/* <Image
-            src={article.authorAvatar}
-            alt={article.author}
-            width={20}
-            height={20}
-            className="rounded-full h-5 w-5"
-          />
-          <p className="text-sm font-normal text-muted">{article.author}</p> */}
         </div>
       </div>
     </Link>
