@@ -40,6 +40,8 @@ export function DynamicTOC({ contentRef, className }: DynamicTOCProps) {
         })
       })
 
+      console.log('Headings', headings)
+
       return items
     }
 
@@ -62,6 +64,8 @@ export function DynamicTOC({ contentRef, className }: DynamicTOCProps) {
   }, [contentRef])
 
   if (tocItems.length === 0) return null
+
+  console.log('TOC Items', tocItems)
 
   return <TableOfContents items={tocItems} className={className} contentRef={contentRef} />
 }

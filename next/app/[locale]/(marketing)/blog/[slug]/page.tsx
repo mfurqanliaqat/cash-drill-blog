@@ -10,6 +10,7 @@ import { CTA } from '@/components/widgets/cta'
 import Table from '@/components/widgets/data-table'
 import ComparisonTable from '@/components/widgets/comparison-table'
 import EarningEstimate from '@/components/widgets/earning-estimate'
+import HighlightOffers from '@/components/widgets/highlight-offers'
 
 export default async function SingleArticlePage({
   params,
@@ -66,6 +67,8 @@ export default async function SingleArticlePage({
         }
       })}
       {/* <EarningEstimate /> */}
+      <div className='mb-8'></div>
+      <HighlightOffers />
     </BlogLayout>
   )
 }
