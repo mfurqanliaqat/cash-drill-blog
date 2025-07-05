@@ -12,30 +12,6 @@
     },
     "sub_heading": {
       "type": "string"
-    },
-    "globe_card": {
-      "displayName": "Globe",
-      "type": "component",
-      "repeatable": false,
-      "component": "cards.globe-card"
-    },
-    "ray_card": {
-      "displayName": "Ray",
-      "type": "component",
-      "repeatable": false,
-      "component": "cards.ray-card"
-    },
-    "graph_card": {
-      "displayName": "Graph",
-      "type": "component",
-      "repeatable": false,
-      "component": "cards.graph-card"
-    },
-    "social_media_card": {
-      "displayName": "Graph",
-      "type": "component",
-      "repeatable": false,
-      "component": "cards.social-media-card"
     }
   }
 }

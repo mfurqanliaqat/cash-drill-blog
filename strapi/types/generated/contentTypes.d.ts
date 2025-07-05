@@ -445,17 +445,11 @@ export interface ApiBlogPageBlogPage extends Struct.SingleTypeSchema {
     dynamic_zone: Schema.Attribute.DynamicZone<
       [
         'dynamic-zone.testimonials',
-        'dynamic-zone.related-products',
         'dynamic-zone.related-articles',
-        'dynamic-zone.pricing',
-        'dynamic-zone.launches',
-        'dynamic-zone.how-it-works',
         'dynamic-zone.hero',
-        'dynamic-zone.form-next-to-section',
         'dynamic-zone.features',
         'dynamic-zone.faq',
         'dynamic-zone.cta',
-        'dynamic-zone.brands',
       ]
     > &
       Schema.Attribute.SetPluginOptions<{
@@ -508,7 +502,6 @@ export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::category.category'> &
       Schema.Attribute.Private
     name: Schema.Attribute.String
-    product: Schema.Attribute.Relation<'manyToOne', 'api::product.product'>
     publishedAt: Schema.Attribute.DateTime
     updatedAt: Schema.Attribute.DateTime
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> & Schema.Attribute.Private
@@ -648,12 +641,7 @@ export interface ApiPagePage extends Struct.CollectionTypeSchema {
         'dynamic-zone.hero',
         'dynamic-zone.features',
         'dynamic-zone.testimonials',
-        'dynamic-zone.how-it-works',
-        'dynamic-zone.brands',
-        'dynamic-zone.pricing',
-        'dynamic-zone.launches',
         'dynamic-zone.cta',
-        'dynamic-zone.form-next-to-section',
         'dynamic-zone.faq',
       ]
     > &
@@ -711,137 +699,6 @@ export interface ApiPayoutPayout extends Struct.CollectionTypeSchema {
     updatedAt: Schema.Attribute.DateTime
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> & Schema.Attribute.Private
     username: Schema.Attribute.String & Schema.Attribute.Required
-  }
-}
-
-export interface ApiPlanPlan extends Struct.CollectionTypeSchema {
-  collectionName: 'plans'
-  info: {
-    description: ''
-    displayName: 'Plans'
-    pluralName: 'plans'
-    singularName: 'plan'
-  }
-  options: {
-    draftAndPublish: true
-  }
-  attributes: {
-    additional_perks: Schema.Attribute.Component<'shared.perks', true>
-    createdAt: Schema.Attribute.DateTime
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> & Schema.Attribute.Private
-    CTA: Schema.Attribute.Component<'shared.button', false>
-    featured: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>
-    locale: Schema.Attribute.String & Schema.Attribute.Private
-    localizations: Schema.Attribute.Relation<'oneToMany', 'api::plan.plan'> &
-      Schema.Attribute.Private
-    name: Schema.Attribute.String
-    perks: Schema.Attribute.Component<'shared.perks', true>
-    price: Schema.Attribute.Integer
-    product: Schema.Attribute.Relation<'manyToOne', 'api::product.product'>
-    publishedAt: Schema.Attribute.DateTime
-    sub_text: Schema.Attribute.String
-    updatedAt: Schema.Attribute.DateTime
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> & Schema.Attribute.Private
-  }
-}
-
-export interface ApiProductPageProductPage extends Struct.SingleTypeSchema {
-  collectionName: 'product_pages'
-  info: {
-    displayName: '/products'
-    pluralName: 'product-pages'
-    singularName: 'product-page'
-  }
-  options: {
-    draftAndPublish: false
-  }
-  pluginOptions: {
-    i18n: {
-      localized: true
-    }
-  }
-  attributes: {
-    createdAt: Schema.Attribute.DateTime
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> & Schema.Attribute.Private
-    dynamic_zone: Schema.Attribute.DynamicZone<
-      [
-        'dynamic-zone.testimonials',
-        'dynamic-zone.related-products',
-        'dynamic-zone.related-articles',
-        'dynamic-zone.pricing',
-        'dynamic-zone.launches',
-        'dynamic-zone.how-it-works',
-        'dynamic-zone.hero',
-        'dynamic-zone.form-next-to-section',
-        'dynamic-zone.features',
-        'dynamic-zone.faq',
-        'dynamic-zone.cta',
-        'dynamic-zone.brands',
-      ]
-    > &
-      Schema.Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true
-        }
-      }>
-    heading: Schema.Attribute.String &
-      Schema.Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true
-        }
-      }>
-    locale: Schema.Attribute.String
-    localizations: Schema.Attribute.Relation<'oneToMany', 'api::product-page.product-page'>
-    publishedAt: Schema.Attribute.DateTime
-    seo: Schema.Attribute.Component<'shared.seo', false> &
-      Schema.Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true
-        }
-      }>
-    sub_heading: Schema.Attribute.String &
-      Schema.Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true
-        }
-      }>
-    updatedAt: Schema.Attribute.DateTime
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> & Schema.Attribute.Private
-  }
-}
-
-export interface ApiProductProduct extends Struct.CollectionTypeSchema {
-  collectionName: 'products'
-  info: {
-    description: ''
-    displayName: 'Products'
-    pluralName: 'products'
-    singularName: 'product'
-  }
-  options: {
-    draftAndPublish: true
-  }
-  attributes: {
-    categories: Schema.Attribute.Relation<'oneToMany', 'api::category.category'>
-    createdAt: Schema.Attribute.DateTime
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> & Schema.Attribute.Private
-    description: Schema.Attribute.String
-    dynamic_zone: Schema.Attribute.DynamicZone<
-      ['dynamic-zone.related-products', 'dynamic-zone.cta']
-    >
-    featured: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>
-    images: Schema.Attribute.Media<'images' | 'files' | 'videos', true>
-    locale: Schema.Attribute.String & Schema.Attribute.Private
-    localizations: Schema.Attribute.Relation<'oneToMany', 'api::product.product'> &
-      Schema.Attribute.Private
-    name: Schema.Attribute.String
-    perks: Schema.Attribute.Component<'shared.perks', true>
-    plans: Schema.Attribute.Relation<'oneToMany', 'api::plan.plan'>
-    price: Schema.Attribute.Integer
-    publishedAt: Schema.Attribute.DateTime
-    slug: Schema.Attribute.UID<'name'>
-    updatedAt: Schema.Attribute.DateTime
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> & Schema.Attribute.Private
   }
 }
 
@@ -1346,9 +1203,6 @@ declare module '@strapi/strapi' {
       'api::logo.logo': ApiLogoLogo
       'api::page.page': ApiPagePage
       'api::payout.payout': ApiPayoutPayout
-      'api::plan.plan': ApiPlanPlan
-      'api::product-page.product-page': ApiProductPageProductPage
-      'api::product.product': ApiProductProduct
       'api::redirection.redirection': ApiRedirectionRedirection
       'api::testimonial.testimonial': ApiTestimonialTestimonial
       'plugin::content-releases.release': PluginContentReleasesRelease
