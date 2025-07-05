@@ -31,7 +31,7 @@ const buttonVariants = cva(
         primary:
           '[--button-bg:theme(colors.primary)] [--button-text:black] [--button-border:theme(colors.primary)] [--button-shadow:theme(colors.primary/0.4)] [--button-outline-shadow:theme(colors.primary)]',
         secondary:
-          '[--button-bg:theme(colors.secondary)] [--button-text:black] [--button-border:theme(colors.secondary)] [--button-shadow:theme(colors.secondary/0.7)] [--button-outline-shadow:theme(colors.secondary)]',
+          '[--button-bg:theme(colors.secondary)] [--button-text:white] [--button-border:theme(colors.secondary)] [--button-shadow:theme(colors.secondary/0.7)] [--button-outline-shadow:theme(colors.secondary)]',
       },
     },
     defaultVariants: {

@@ -1,6 +1,6 @@
 'use client'
 import { Logo } from '@/components/logo'
-import { Button } from '@/components/elements/button'
+import { Button } from '@/components/ui/button'
 import { NavbarItem } from './navbar-item'
 import { useMotionValueEvent, useScroll, motion, AnimatePresence } from 'framer-motion'
 import { cn } from '@/lib/utils'
@@ -82,7 +82,6 @@ export const DesktopNavbar = ({ leftNavbarItems, rightNavbarItems, logo, locale 
           <Button
             key={item.text}
             color={index === rightNavbarItems.length - 1 ? 'primary' : 'secondary'}
-            as={Link}
             href={`/${locale}${item.URL}`}
           >
             {item.text}
