@@ -16,21 +16,21 @@ const config: Config = {
     'border-secondary',
     {
       pattern:
-        /^text-(primary|secondary|error|muted|subdued|grey|brown|green|blue|gold|red|purple|orange|background|border)$/,
+        /^text-(primary|secondary|accent|error|muted|subdued|grey|brown|green|blue|gold|red|purple|orange|background|border)$/,
     },
     {
       pattern:
-        /^bg-(primary|secondary|error|muted|subdued|grey|brown|green|blue|gold|red|purple|orange|background|border)$/,
+        /^bg-(primary|secondary|accent|error|muted|subdued|grey|brown|green|blue|gold|red|purple|orange|background|border)$/,
     },
     // Shadow opacity variants
     {
       pattern:
-        /^shadow-(primary|secondary|error|muted|subdued|grey|brown|green|blue|gold|red|purple|orange|background|border)\/(5|10|15|20|25|30|35|40|45|50|55|60|65|70|75|80|85|90|95)$/,
+        /^shadow-(primary|secondary|accent|error|muted|subdued|grey|brown|green|blue|gold|red|purple|orange|background|border)\/(5|10|15|20|25|30|35|40|45|50|55|60|65|70|75|80|85|90|95)$/,
     },
     // Border opacity variants
     {
       pattern:
-        /^border-(primary|secondary|error|muted|subdued|grey|brown|green|blue|gold|red|purple|orange|background|border)\/(5|10|15|20|25|30|35|40|45|50|55|60|65|70|75|80|85|90|95)$/,
+        /^border-(primary|secondary|accent|error|muted|subdued|grey|brown|green|blue|gold|red|purple|orange|background|border)\/(5|10|15|20|25|30|35|40|45|50|55|60|65|70|75|80|85|90|95)$/,
     },
   ],
   theme: {
@@ -40,7 +40,7 @@ const config: Config = {
         secondary: '#377BF5',
         muted: '#A5A5A5',
         subdued: '#6CAFC1',
-        card: '#2A2D33',
+        card: '#181a1f',
         error: '#ef4444',
         // Greys
         grey: {
@@ -72,6 +72,7 @@ const config: Config = {
         },
 
         // Accent Colors
+        accent: '#7e27ff',
         red: {
           60: '#FF2929',
         },
@@ -87,10 +88,10 @@ const config: Config = {
           main: '#0F1115',
           gradientMiddle: '#111318',
           header: '#111318',
-          card: '#1B1A1F',
+          card: '#181a1f',
         },
         border: {
-          card: '#2A2D33',
+          gradient: 'var(--border-gradient)',
         },
       },
       boxShadow: {

@@ -32,6 +32,8 @@ const buttonVariants = cva(
           '[--button-bg:theme(colors.primary)] [--button-text:black] [--button-border:theme(colors.primary)] [--button-shadow:theme(colors.primary/0.4)] [--button-outline-shadow:theme(colors.primary)]',
         secondary:
           '[--button-bg:theme(colors.secondary)] [--button-text:white] [--button-border:theme(colors.secondary)] [--button-shadow:theme(colors.secondary/0.7)] [--button-outline-shadow:theme(colors.secondary)]',
+        accent:
+          '[--button-bg:theme(colors.accent)] [--button-text:white] [--button-border:theme(colors.accent)] [--button-shadow:theme(colors.accent/0.4)] [--button-outline-shadow:theme(colors.accent)]',
       },
     },
     defaultVariants: {
@@ -56,7 +58,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       buttonVariants({
         variant,
         size,
-        colorVariant: color as 'primary' | 'secondary',
+        colorVariant: color as 'primary' | 'secondary' | 'accent',
         className,
       })
     )
