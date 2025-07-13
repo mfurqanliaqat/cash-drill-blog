@@ -1,32 +1,38 @@
 import React from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
-import netflix from '../../public/netflix.jpg'
-import Image from 'next/image'
 import { Badge } from '../ui/badge'
+import OfferHighlightCard from './offer-highlights/offer-highlight-card'
 
-function HighlightOffers() {
+interface HighloghtedOffer {
+  title: string
+  description: string
+  price: string
+  badge: string
+  images: {
+    url: string
+    alt: string
+  }[]
+}
+
+interface HighlightOffersProps {
+  heading: string
+  offers: HighloghtedOffer[]
+}
+
+function HighlightOffers({ heading, offers }: HighlightOffersProps) {
   return (
-    <Card>
-      <CardHeader>
-        <Image
-          src={netflix}
-          alt='Netflix'
-          className='w-60 object-cover h-auto rounded-lg not-prose'
-        />
-      </CardHeader>
-      <CardContent>
-        <div className='flex flex-col gap-1 items-start'>
-          <div className='text-lg font-semibold'>Netflix</div>
-          <div className='text-sm text-muted-foreground'>Start a trial month</div>
-          <div className='flex items-center justify-between w-full'>
-            <div className='text-primary font-semibold text-xl'>$10</div>
-            <div className='text-primary font-semibold text-xl'>
-              <Badge color='accent'>Trial</Badge>
-            </div>
+    <div className='w-full max-w-3xl mx-auto my-8'>
+      <Card variant='gradient'>
+        <CardHeader>{heading}</CardHeader>
+        <CardContent>
+          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
+            {offers.map(offer => (
+              <OfferHighlightCard key={offer.title} {...offer} />
+            ))}
           </div>
-        </div>
-      </CardContent>
-    </Card>
+        </CardContent>
+      </Card>
+    </div>
   )
 }
 

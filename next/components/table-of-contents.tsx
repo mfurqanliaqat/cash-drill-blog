@@ -119,7 +119,7 @@ export function TableOfContents({ items, className, contentRef }: TableOfContent
     <>
       <div
         className={cn(
-          'sticky top-0 z-40 bg-background-header backdrop-blur-sm border-b border-border-card shadow-sm rounded-t-3xl',
+          'sticky top-0 z-40 bg-background-header backdrop-blur-sm border-b border-card shadow-sm rounded-t-3xl',
           className
         )}
       >

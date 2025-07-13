@@ -113,7 +113,8 @@
         "widgets.cta",
         "widgets.table",
         "widgets.comparison-table",
-        "widgets.estimation-bar-chart"
+        "widgets.estimation-bar-chart",
+        "widgets.highlighted-offers"
       ],
       "pluginOptions": {
         "i18n": {

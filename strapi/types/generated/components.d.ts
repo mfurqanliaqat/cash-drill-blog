@@ -225,6 +225,23 @@ export interface SharedLink extends Struct.ComponentSchema {
   }
 }
 
+export interface SharedOffer extends Struct.ComponentSchema {
+  collectionName: 'components_shared_offers'
+  info: {
+    description: ''
+    displayName: 'Offer'
+    icon: 'star'
+  }
+  attributes: {
+    badge: Schema.Attribute.String
+    currency: Schema.Attribute.Enumeration<['USD', 'EUR']>
+    description: Schema.Attribute.String
+    images: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios', true>
+    price: Schema.Attribute.Decimal
+    title: Schema.Attribute.String
+  }
+}
+
 export interface SharedPerks extends Struct.ComponentSchema {
   collectionName: 'components_shared_perks'
   info: {
@@ -461,6 +478,18 @@ export interface WidgetsEstimationBarChart extends Struct.ComponentSchema {
   }
 }
 
+export interface WidgetsHighlightedOffers extends Struct.ComponentSchema {
+  collectionName: 'components_widgets_highlighted_offers'
+  info: {
+    displayName: 'highlighted-offers'
+    icon: 'slideshow'
+  }
+  attributes: {
+    heading: Schema.Attribute.String
+    offers: Schema.Attribute.Component<'shared.offer', true>
+  }
+}
+
 export interface WidgetsTable extends Struct.ComponentSchema {
   collectionName: 'components_widgets_tables'
   info: {
@@ -492,6 +521,7 @@ declare module '@strapi/strapi' {
       'shared.button': SharedButton
       'shared.form': SharedForm
       'shared.link': SharedLink
+      'shared.offer': SharedOffer
       'shared.perks': SharedPerks
       'shared.range-bar': SharedRangeBar
       'shared.rich-text': SharedRichText
@@ -507,6 +537,7 @@ declare module '@strapi/strapi' {
       'widgets.comparison-table': WidgetsComparisonTable
       'widgets.cta': WidgetsCta
       'widgets.estimation-bar-chart': WidgetsEstimationBarChart
+      'widgets.highlighted-offers': WidgetsHighlightedOffers
       'widgets.table': WidgetsTable
     }
   }

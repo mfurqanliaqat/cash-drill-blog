@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_widgets_highlighted_offers",
+  "info": {
+    "displayName": "highlighted-offers",
+    "icon": "slideshow"
+  },
+  "options": {},
+  "attributes": {
+    "offers": {
+      "displayName": "Offer",
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.offer"
+    },
+    "heading": {
+      "type": "string"
+    }
+  }
+}

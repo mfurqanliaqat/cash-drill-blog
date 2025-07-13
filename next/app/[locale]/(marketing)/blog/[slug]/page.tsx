@@ -34,6 +34,8 @@ export default async function SingleArticlePage({
     return <div>Blog not found</div>
   }
 
+  console.log(JSON.stringify(article?.dynamicContent, null, 2))
+
   const localizedSlugs = article.localizations?.reduce(
     (acc: Record<string, string>, localization: any) => {
       acc[localization.locale] = localization.slug
@@ -41,9 +43,6 @@ export default async function SingleArticlePage({
     },
     { [params.locale]: params.slug }
   )
-
-  console.log('payouts', payouts)
-  console.log('article', article)
 
   return (
     <BlogLayout article={article} locale={params.locale}>
@@ -65,10 +64,11 @@ export default async function SingleArticlePage({
         if (block.__component === 'widgets.estimation-bar-chart') {
           return <EarningEstimate key={index} {...block} />
         }
+        if (block.__component === 'widgets.highlighted-offers') {
+          return <HighlightOffers key={index} {...block} />
+        }
       })}
-      {/* <EarningEstimate /> */}
       <div className='mb-8'></div>
-      <HighlightOffers />
     </BlogLayout>
   )
 }

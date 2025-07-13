@@ -382,6 +382,7 @@ export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
         'widgets.table',
         'widgets.comparison-table',
         'widgets.estimation-bar-chart',
+        'widgets.highlighted-offers',
       ]
     > &
       Schema.Attribute.SetPluginOptions<{

@@ -10,6 +10,7 @@ import SpinWheel from './widgets/spin-wheel'
 import PayoutSliderStrip from './payout-slider-strip'
 import CarouselWidget from './widgets/slider'
 import BlogSocialLinks from './blog-social-links'
+import { Card } from './ui/card'
 
 export function BlogLayout({
   article,
@@ -29,7 +30,7 @@ export function BlogLayout({
         <div className='grid grid-cols-1 lg:grid-cols-12 gap-4'>
           <div className='lg:col-span-9'>
             <BlogArticleOverview article={article} locale={locale} />
-            <div className='bg-background-main border-4 border-border-card rounded-3xl'>
+            <Card className='bg-background-main'>
               <DynamicTOC contentRef={contentRef} />
               <article className='pb-8 pt-8 px-4'>
                 <div className='flex items-center justify-center'>
@@ -38,7 +39,7 @@ export function BlogLayout({
                   </div>
                 </div>
               </article>
-            </div>
+            </Card>
           </div>
           <div className='lg:col-span-3'>
             <div className='sticky top-2 rounded-3xl flex flex-col items-center justify-center gap-4'>

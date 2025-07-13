@@ -6,13 +6,12 @@
 
 :root {
   --foreground-rgb: 255, 255, 255;
-  --border-gradient: linear-gradient(150.6deg, #00e676 0%, #4e545f 9%);
+  --border-gradient: linear-gradient(150.6deg, #00e676 0%, #4e545f 15%);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;
-    --border-gradient: linear-gradient(150.6deg, #00e676 0%, #4e545f 9%);
   }
 }
 
