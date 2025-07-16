@@ -11,8 +11,10 @@ function QuickOverviewClient({ sideNavigation }: { sideNavigation: any }) {
 
   return (
     <div className='max-w-2xl mx-auto w-full flex flex-col gap-4'>
-      <SpinWheel />
-      <CarouselWidget data={carouselData} />
+      <SpinWheel stopAtPrize='$5.00' />
+      <div className='sticky top-4 z-10'>
+        <CarouselWidget data={carouselData} />
+      </div>
     </div>
   )
 }

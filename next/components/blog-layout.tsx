@@ -37,9 +37,9 @@ export function BlogLayout({
               </article>
             </Card>
           </div>
-          <div className='lg:col-span-3'>
+          <div className='lg:col-span-3 flex flex-col gap-4'>
+            <QuickOverview locale={locale} />
             <div className='sticky top-2 rounded-3xl flex flex-col items-center justify-center gap-4'>
-              <QuickOverview locale={locale} />
               <h1 className='font-bold text-muted'>SHARE THIS ARTICLE</h1>
               <BlogSocialLinks />
             </div>

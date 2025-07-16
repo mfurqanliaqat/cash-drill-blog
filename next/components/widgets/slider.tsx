@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
   Carousel,
   CarouselContent,
@@ -9,6 +9,7 @@ import {
 import { Card, CardContent } from '../ui/card'
 import Image from 'next/image'
 import { strapiImage } from '@/lib/strapi/strapiImage'
+import './slider-progressbar.css'
 
 interface CarouselWidgetProps {
   data?: {
@@ -27,6 +28,10 @@ function CarouselWidget({ data }: CarouselWidgetProps) {
   const items = data?.items || []
   const [selectedIndex, setSelectedIndex] = useState(0)
   const [slideCount, setSlideCount] = useState(items.length)
+  const [carouselApi, setCarouselApi] = useState<any>(null)
+  const [progressKey, setProgressKey] = useState(0)
+
+  const AUTO_SLIDE_INTERVAL = 3000
 
   const handleSetApi = (api: any) => {
     if (!api) return
@@ -34,8 +39,23 @@ function CarouselWidget({ data }: CarouselWidgetProps) {
     setSelectedIndex(api.selectedScrollSnap())
     api.on('select', () => {
       setSelectedIndex(api.selectedScrollSnap())
+      setProgressKey(prev => prev + 1) // reset progress animation
     })
+    setCarouselApi(api)
   }
+
+  useEffect(() => {
+    if (!carouselApi) return
+    const interval = setInterval(() => {
+      carouselApi.scrollNext()
+    }, AUTO_SLIDE_INTERVAL)
+    return () => clearInterval(interval)
+  }, [carouselApi])
+
+  // Reset progress bar on slide change
+  useEffect(() => {
+    setProgressKey(prev => prev + 1)
+  }, [selectedIndex])
 
   return (
     <Card className='relative'>
@@ -79,10 +99,20 @@ function CarouselWidget({ data }: CarouselWidgetProps) {
               {Array.from({ length: slideCount }).map((_, idx) => (
                 <span
                   key={idx}
-                  className={`h-2 w-2 rounded-full transition-all ${
-                    idx === selectedIndex ? 'bg-primary w-8' : 'bg-card w-2'
-                  }`}
-                />
+                  className={`h-2 w-8 rounded-full transition-all relative overflow-hidden bg-primary/40`}
+                  style={{ width: idx === selectedIndex ? 32 : 8, transition: 'width 0.3s' }}
+                >
+                  {idx === selectedIndex && (
+                    <span
+                      key={progressKey}
+                      className='absolute left-0 top-0 h-full bg-primary rounded-full'
+                      style={{
+                        width: '0%',
+                        animation: `progressBarFill ${AUTO_SLIDE_INTERVAL}ms linear forwards`,
+                      }}
+                    />
+                  )}
+                </span>
               ))}
             </div>
             <CarouselNext className='translate-y-0 top-0 relative' />
