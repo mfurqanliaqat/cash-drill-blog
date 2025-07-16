@@ -13,7 +13,13 @@ interface CTAProps {
 
 export const CTA = ({ text, URL, target, variant, locale }: CTAProps) => {
   return (
-    <Button target={target} href={`${URL}`} variant={variant} size='lg'>
+    <Button
+      target={target}
+      href={`${URL}`}
+      variant={variant}
+      size='lg'
+      className='max-w-sm mx-auto'
+    >
       {text}
     </Button>
   )
