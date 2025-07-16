@@ -27,9 +27,8 @@ export const Footer = async ({ data, locale }: { data: any; locale: string }) =>
           <div className='font-semibold'>{data?.copyright}</div>
           <span className='text-muted opacity-50 select-none'>|</span>
           {data?.policy_links.map((link: { text: string; URL: string }, index: number) => (
-            <>
+            <React.Fragment key={link.text}>
               <Link
-                key={link.text}
                 className='transition-colors hover:text-primary text-muted font-semibold'
                 href={`${link.URL.startsWith('http') ? '' : `/${locale}`}${link.URL}`}
               >
@@ -38,7 +37,7 @@ export const Footer = async ({ data, locale }: { data: any; locale: string }) =>
               {index < data.policy_links.length - 1 && (
                 <span className='text-muted opacity-50 select-none'>|</span>
               )}
-            </>
+            </React.Fragment>
           ))}
         </div>
       </Container>

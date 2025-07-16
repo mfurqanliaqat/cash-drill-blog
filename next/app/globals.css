@@ -2,27 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 @import './prism.css';
-@import url('https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 :root {
   --foreground-rgb: 255, 255, 255;
   --border-gradient: linear-gradient(150.6deg, #00e676 0%, #4e545f 15%);
+  --background-rgb: 15, 17, 21;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;
+    --background-rgb: 15, 17, 21;
   }
-}
-
-body,
-html,
-* {
-  font-family: 'Rethink Sans', sans-serif;
 }
 
 body {
   color: rgb(var(--foreground-rgb));
+  background-color: rgb(var(--background-rgb));
 }
 
 @layer utilities {

@@ -5,18 +5,18 @@ import { TOCItem, generateIdFromTitle } from '@/lib/toc'
 import { TableOfContents } from './table-of-contents'
 
 interface DynamicTOCProps {
-  contentRef: React.RefObject<HTMLElement>
+  contentSelector: string
   className?: string
 }
 
-export function DynamicTOC({ contentRef, className }: DynamicTOCProps) {
+export function DynamicTOC({ contentSelector, className }: DynamicTOCProps) {
   const [tocItems, setTocItems] = useState<TOCItem[]>([])
 
   useEffect(() => {
-    if (!contentRef.current) return
+    const content = document.querySelector(contentSelector) as HTMLElement | null
+    if (!content) return
 
     const extractHeadings = () => {
-      const content = contentRef.current
       if (!content) return []
 
       const headings = content.querySelectorAll('h1, h2, h3, h4, h5, h6')
@@ -55,17 +55,17 @@ export function DynamicTOC({ contentRef, className }: DynamicTOCProps) {
       setTocItems(newItems)
     })
 
-    observer.observe(contentRef.current, {
+    observer.observe(content, {
       childList: true,
       subtree: true,
     })
 
     return () => observer.disconnect()
-  }, [contentRef])
+  }, [contentSelector])
 
   if (tocItems.length === 0) return null
 
   console.log('TOC Items', tocItems)
 
-  return <TableOfContents items={tocItems} className={className} contentRef={contentRef} />
+  return <TableOfContents items={tocItems} className={className} contentRef={undefined} />
 }

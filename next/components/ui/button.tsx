@@ -5,31 +5,31 @@ import Link from 'next/link'
 import { cn } from '@/lib/utils'
 
 const buttonVariants = cva(
-  'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-950 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-6 [&_svg]:shrink-0 dark:ring-offset-neutral-950 dark:focus-visible:ring-neutral-300',
+  'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-[0.5em] text-sm font-medium ring-offset-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-950 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-6 [&_svg]:shrink-0 dark:ring-offset-neutral-950 dark:focus-visible:ring-neutral-300',
   {
     variants: {
       variant: {
         default:
-          'font-extrabold rounded-xl px-4 py-2 text-lg flex items-center justify-center transition-all duration-200 hover:brightness-105 active:translate-y-1 bg-[var(--button-bg)] text-[var(--button-text)] shadow-lg shadow-[var(--button-shadow)] active:shadow-[0_2px_0_0_var(--button-shadow)]',
+          'font-semibold rounded-[0.5em] px-5 py-2 text-[16px] flex items-center justify-center transition-all duration-200 hover:brightness-105 active:translate-y-1 bg-[var(--button-bg)] text-[var(--button-text)] shadow-lg shadow-[var(--button-shadow)] active:shadow-[0_2px_0_0_var(--button-shadow)]',
         destructive:
-          'bg-error shadow-lg shadow-error/70 active:shadow-[0_2px_0_0_var(--tw-shadow-color)] font-extrabold rounded-xl px-4 py-2 text-lg flex items-center justify-center transition-all duration-200 hover:brightness-105 active:translate-y-1',
+          'bg-error shadow-lg shadow-error/70 active:shadow-[0_2px_0_0_var(--tw-shadow-color)] font-semibold rounded-[0.5em] px-4 py-2 text-[16px] flex items-center justify-center transition-all duration-200 hover:brightness-105 active:translate-y-1',
         outline:
-          'bg-transparent border-2 font-extrabold rounded-xl px-4 py-2 text-lg flex items-center justify-center transition-all duration-200 hover:brightness-105 active:translate-y-1 border-[var(--button-border)] text-white shadow-lg shadow-[var(--button-shadow)] active:shadow-[0_2px_0_0_var(--button-outline-shadow)]',
+          'bg-transparent border-2 font-semibold rounded-[0.5em] px-4 py-2 text-[16px] flex items-center justify-center transition-all duration-200 hover:brightness-105 active:translate-y-1 border-[var(--button-border)] text-white shadow-lg shadow-[var(--button-shadow)] active:shadow-[0_2px_0_0_var(--button-outline-shadow)]',
         secondary:
-          'bg-secondary shadow-lg shadow-secondary/70 active:shadow-[0_2px_0_0_var(--tw-shadow-color)] font-extrabold rounded-xl px-4 py-2 text-lg flex items-center justify-center transition-all duration-200 hover:brightness-105 active:translate-y-1',
+          'bg-secondary shadow-lg shadow-secondary/70 active:shadow-[0_2px_0_0_var(--tw-shadow-color)] font-semibold rounded-[0.5em] px-4 py-2 text-[16px] flex items-center justify-center transition-all duration-200 hover:brightness-105 active:translate-y-1',
         ghost:
           'hover:bg-neutral-100 hover:text-neutral-900 dark:hover:bg-neutral-800 dark:hover:text-neutral-50',
         link: 'text-neutral-900 underline-offset-4 hover:underline dark:text-neutral-50',
       },
       size: {
-        default: 'h-10 px-4 py-2',
-        sm: 'h-9 rounded-md px-3',
-        lg: 'h-11 rounded-md px-8',
-        icon: 'h-12 w-12',
+        default: 'px-5 py-2 shadow-md',
+        sm: 'h-9 px-3 shadow-sm',
+        lg: 'py-4 text-[18px] px-8 shadow-lg',
+        icon: 'h-12 w-12 shadow-md',
       },
       colorVariant: {
         primary:
-          '[--button-bg:theme(colors.primary)] [--button-text:black] [--button-border:theme(colors.primary)] [--button-shadow:theme(colors.primary/0.4)] [--button-outline-shadow:theme(colors.primary)]',
+          '[--button-bg:theme(colors.primary)] [--button-text:black] [--button-border:theme(colors.primary)] [--button-shadow:theme(colors.primary/0.7)] [--button-outline-shadow:theme(colors.primary)]',
         secondary:
           '[--button-bg:theme(colors.secondary)] [--button-text:white] [--button-border:theme(colors.secondary)] [--button-shadow:theme(colors.secondary/0.7)] [--button-outline-shadow:theme(colors.secondary)]',
         accent:

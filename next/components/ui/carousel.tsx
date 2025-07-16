@@ -181,24 +181,28 @@ const CarouselPrevious = React.forwardRef<HTMLButtonElement, React.ComponentProp
     const { orientation, scrollPrev, canScrollPrev } = useCarousel()
 
     return (
-      <Button
-        ref={ref}
-        variant={variant}
-        size={size}
+      <div
         className={cn(
-          'absolute  h-8 w-8 rounded-full',
+          'absolute',
           orientation === 'horizontal'
             ? '-left-12 top-1/2 -translate-y-1/2'
             : '-top-12 left-1/2 -translate-x-1/2 rotate-90',
           className
         )}
-        disabled={!canScrollPrev}
-        onClick={scrollPrev}
-        {...props}
       >
-        <IconArrowLeft className='h-4 w-4' />
-        <span className='sr-only'>Previous slide</span>
-      </Button>
+        <Button
+          ref={ref}
+          variant={variant}
+          size={size}
+          disabled={!canScrollPrev}
+          className='rounded-full w-10 h-10'
+          onClick={scrollPrev}
+          {...props}
+        >
+          <IconArrowLeft className='h-4 w-4' />
+          <span className='sr-only'>Previous slide</span>
+        </Button>
+      </div>
     )
   }
 )
@@ -209,24 +213,28 @@ const CarouselNext = React.forwardRef<HTMLButtonElement, React.ComponentProps<ty
     const { orientation, scrollNext, canScrollNext } = useCarousel()
 
     return (
-      <Button
-        ref={ref}
-        variant={variant}
-        size={size}
+      <div
         className={cn(
-          'absolute h-8 w-8 rounded-full',
+          'absolute',
           orientation === 'horizontal'
             ? '-right-12 top-1/2 -translate-y-1/2'
             : '-bottom-12 left-1/2 -translate-x-1/2 rotate-90',
           className
         )}
-        disabled={!canScrollNext}
-        onClick={scrollNext}
-        {...props}
       >
-        <IconArrowRight className='h-4 w-4' />
-        <span className='sr-only'>Next slide</span>
-      </Button>
+        <Button
+          ref={ref}
+          variant={variant}
+          size={size}
+          className='rounded-full w-10 h-10'
+          disabled={!canScrollNext}
+          onClick={scrollNext}
+          {...props}
+        >
+          <IconArrowRight className='h-4 w-4' />
+          <span className='sr-only'>Next slide</span>
+        </Button>
+      </div>
     )
   }
 )

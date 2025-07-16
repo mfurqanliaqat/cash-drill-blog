@@ -117,6 +117,20 @@ export interface GlobalNavbar extends Struct.ComponentSchema {
   }
 }
 
+export interface ItemsCarouselItem extends Struct.ComponentSchema {
+  collectionName: 'components_items_carousel_items'
+  info: {
+    description: ''
+    displayName: 'Carousel_Item'
+    icon: 'landscape'
+  }
+  attributes: {
+    description: Schema.Attribute.String
+    heading: Schema.Attribute.String
+    image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>
+  }
+}
+
 export interface ItemsInput extends Struct.ComponentSchema {
   collectionName: 'components_items_inputs'
   info: {
@@ -197,6 +211,20 @@ export interface SharedButton extends Struct.ComponentSchema {
     URL: Schema.Attribute.String
     variant: Schema.Attribute.Enumeration<['simple', 'outline', 'primary', 'muted']> &
       Schema.Attribute.DefaultTo<'primary'>
+  }
+}
+
+export interface SharedCarousel extends Struct.ComponentSchema {
+  collectionName: 'components_shared_carousels'
+  info: {
+    description: ''
+    displayName: 'Carousel'
+    icon: 'landscape'
+  }
+  attributes: {
+    description: Schema.Attribute.String
+    heading: Schema.Attribute.String
+    items: Schema.Attribute.Component<'items.carousel-item', true>
   }
 }
 
@@ -515,10 +543,12 @@ declare module '@strapi/strapi' {
       'dynamic-zone.testimonials': DynamicZoneTestimonials
       'global.footer': GlobalFooter
       'global.navbar': GlobalNavbar
+      'items.carousel-item': ItemsCarouselItem
       'items.input': ItemsInput
       'items.left-navbar-items': ItemsLeftNavbarItems
       'items.ray-items': ItemsRayItems
       'shared.button': SharedButton
+      'shared.carousel': SharedCarousel
       'shared.form': SharedForm
       'shared.link': SharedLink
       'shared.offer': SharedOffer

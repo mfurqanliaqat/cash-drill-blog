@@ -588,6 +588,7 @@ export interface ApiGlobalGlobal extends Struct.SingleTypeSchema {
           localized: true
         }
       }>
+    sideNavigation: Schema.Attribute.DynamicZone<['shared.carousel']>
     updatedAt: Schema.Attribute.DateTime
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> & Schema.Attribute.Private
   }

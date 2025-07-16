@@ -96,6 +96,7 @@ const config: Config = {
       },
       boxShadow: {
         lg: '0px 6px 0px 0px var(--tw-shadow-primary)',
+        md: '0px 4px 0px 0px var(--tw-shadow-primary)',
         sm: '0px 2px 0px 0px var(--tw-shadow-primary)',
         primary: `0px 6px 0px 0px var(--tw-shadow-primary)`,
         secondary: `0px 6px 0px 0px var(--tw-shadow-secondary)`,

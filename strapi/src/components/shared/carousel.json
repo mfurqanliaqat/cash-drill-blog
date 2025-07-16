@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_shared_carousels",
+  "info": {
+    "displayName": "Carousel",
+    "icon": "landscape",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "items": {
+      "type": "component",
+      "repeatable": true,
+      "component": "items.carousel-item"
+    },
+    "heading": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    }
+  }
+}

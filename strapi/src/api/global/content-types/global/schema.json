@@ -47,6 +47,12 @@
         }
       },
       "component": "global.footer"
+    },
+    "sideNavigation": {
+      "type": "dynamiczone",
+      "components": [
+        "shared.carousel"
+      ]
     }
   }
 }

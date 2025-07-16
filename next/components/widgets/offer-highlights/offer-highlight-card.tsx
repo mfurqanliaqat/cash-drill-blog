@@ -3,6 +3,7 @@ import { Badge } from '@/components/ui/badge'
 import { Card, CardContent, CardHeader } from '@/components/ui/card'
 import Image from 'next/image'
 import { strapiImage } from '@/lib/strapi/strapiImage'
+import Currency from '@/components/currency'
 
 interface OfferHighlightCardProps {
   title: string
@@ -35,12 +36,14 @@ function OfferHighlightCard({ title, description, price, badge, images }: OfferH
           <div className='text-lg font-semibold'>{title}</div>
           <div className='text-sm text-muted-foreground'>{description}</div>
           <div className='flex items-center justify-between w-full'>
-            <div className='text-primary font-semibold text-xl'>{price}</div>
-            <div className='text-primary font-semibold text-xl'>
-              <Badge color='accent' size='sm'>
-                {badge}
-              </Badge>
-            </div>
+            <Currency
+              value={Number(price)}
+              currency='USD'
+              className='text-xl font-semibold text-primary'
+            />
+            <Badge color='accent' size='sm'>
+              {badge}
+            </Badge>
           </div>
         </div>
       </CardContent>
