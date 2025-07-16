@@ -1,14 +1,24 @@
 import React from 'react'
 
+import { Rethink_Sans } from 'next/font/google'
+
 import { Metadata } from 'next'
 import { generateMetadataObject } from '@/lib/shared/metadata'
 
 import { Footer } from '@/components/footer'
 import { Navbar } from '@/components/navbar'
-import { CartProvider } from '@/context/cart-context'
 import { cn } from '@/lib/utils'
 import { ViewTransitions } from 'next-view-transitions'
 import fetchContentType from '@/lib/strapi/fetchContentType'
+
+const rethinkSans = Rethink_Sans({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-rethink-sans',
+  display: 'swap',
+  preload: true,
+  style: ['normal', 'italic'],
+})
 
 // Default Global SEO for pages without them
 export async function generateMetadata({
@@ -41,13 +51,11 @@ export default async function LocaleLayout({
   return (
     <html lang={locale}>
       <ViewTransitions>
-        <CartProvider>
-          <body className={cn('bg-background-main antialiased h-full w-full')}>
-            <Navbar data={pageData.navbar} locale={locale} />
-            {children}
-            <Footer data={pageData.footer} locale={locale} />
-          </body>
-        </CartProvider>
+        <body className={cn('bg-background-main antialiased h-full w-full', rethinkSans.className)}>
+          <Navbar data={pageData.navbar} locale={locale} />
+          {children}
+          <Footer data={pageData.footer} locale={locale} />
+        </body>
       </ViewTransitions>
     </html>
   )

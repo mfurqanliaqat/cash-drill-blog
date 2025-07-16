@@ -32,7 +32,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang={params.lang} suppressHydrationWarning>
-      <body className={rethinkSans.className} suppressHydrationWarning>
+      <body suppressHydrationWarning>
         <SlugProvider>{children}</SlugProvider>
       </body>
     </html>

@@ -1,5 +1,5 @@
 import { Container } from './container'
-//import DynamicZoneManager from './dynamic-zone/manager'
+import DynamicZoneManager from './dynamic-zone/manager'
 import { Article } from '@/types/types'
 import { BlogArticleOverview } from './blog-article-overview'
 import { DynamicTOC } from './dynamic-toc'
@@ -38,9 +38,9 @@ export function BlogLayout({
             <QuickOverview locale={locale} />
           </div>
         </div>
-        {/* {article?.dynamic_zone && (
+        {article?.dynamic_zone && (
           <DynamicZoneManager dynamicZone={article?.dynamic_zone} locale={locale} />
-        )} */}
+        )}
       </Container>
     </>
   )

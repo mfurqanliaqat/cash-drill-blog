@@ -24,7 +24,7 @@ function OfferHighlightCard({ title, description, price, badge, images }: OfferH
           <div className='h-[120px] relative'>
             <Image
               src={strapiImage(images[0].url)}
-              alt={images[0].alt}
+              alt={images[0].alt || title}
               className='object-cover mx-auto rounded-lg not-prose'
               fill
             />
