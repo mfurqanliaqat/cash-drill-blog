@@ -2,6 +2,7 @@
 import CarouselWidget from './widgets/slider'
 import React from 'react'
 import SpinWheel from './widgets/spin-wheel'
+import BlogSocialLinks from './blog-social-links'
 
 function QuickOverviewClient({ sideNavigation }: { sideNavigation: any }) {
   // Find the first carousel component in sideNavigation
@@ -10,12 +11,16 @@ function QuickOverviewClient({ sideNavigation }: { sideNavigation: any }) {
     : null
 
   return (
-    <div className='max-w-2xl mx-auto w-full flex flex-col gap-4'>
-      <SpinWheel stopAtPrize='$5.00' />
-      <div className='sticky top-4 z-10'>
-        <CarouselWidget data={carouselData} />
+    <>
+      <div className='flex flex-col items-center justify-center gap-4'>
+        <SpinWheel stopAtPrize='$5.00' />
       </div>
-    </div>
+      <div className='sticky top-2 rounded-3xl flex flex-col items-center justify-center gap-4'>
+        <CarouselWidget data={carouselData} />
+        <h1 className='font-bold text-muted'>SHARE THIS ARTICLE</h1>
+        <BlogSocialLinks />
+      </div>
+    </>
   )
 }
 

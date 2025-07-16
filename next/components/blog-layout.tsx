@@ -1,12 +1,9 @@
 import { Container } from './container'
-import DynamicZoneManager from './dynamic-zone/manager'
+//import DynamicZoneManager from './dynamic-zone/manager'
 import { Article } from '@/types/types'
 import { BlogArticleOverview } from './blog-article-overview'
 import { DynamicTOC } from './dynamic-toc'
-import SpinWheel from './widgets/spin-wheel'
 import PayoutSliderStrip from './payout-slider-strip'
-import CarouselWidget from './widgets/slider'
-import BlogSocialLinks from './blog-social-links'
 import { Card } from './ui/card'
 import QuickOverview from './quick-overview'
 
@@ -39,10 +36,6 @@ export function BlogLayout({
           </div>
           <div className='lg:col-span-3 flex flex-col gap-4'>
             <QuickOverview locale={locale} />
-            <div className='sticky top-2 rounded-3xl flex flex-col items-center justify-center gap-4'>
-              <h1 className='font-bold text-muted'>SHARE THIS ARTICLE</h1>
-              <BlogSocialLinks />
-            </div>
           </div>
         </div>
         {/* {article?.dynamic_zone && (
