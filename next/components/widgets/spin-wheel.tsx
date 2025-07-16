@@ -44,19 +44,49 @@ function SpinWheel() {
   const CENTER = WHEEL_SIZE / 2
   const CENTER_CIRCLE_RADIUS = 60
 
-  return (
-    <Card>
-      <CardHeader>
-        <CardTitle className='text-center'>
+  // Overlay logic
+  const showOverlay = !spinning || (selected !== null && !spinning)
+  const overlayText =
+    selected !== null && !spinning ? (
+      <div className='flex flex-col items-center justify-center gap-2 text-center p-10'>
+        <h1 className='text-2xl font-bold'>Congratulations!</h1>
+        <h1 className='text-xl font-bold'>
+          We&apos;ve added <span className='text-primary'>{PRIZES[selected]}</span> to your wallet.
+        </h1>
+      </div>
+    ) : (
+      <div className='flex flex-col items-center justify-center gap-2 text-center p-10'>
+        <h1 className='text-2xl font-bold'>
           Earn <span className='text-primary'>up to $100</span> on your first completed offer
-        </CardTitle>
-      </CardHeader>
-      <CardContent className='flex flex-col items-center justify-center gap-4 text-center'>
-        {/* Spinning Wheel SVG */}
+        </h1>
+        <p className='text-white/80'>Spin the wheel to win a prize.</p>
+        <Button onClick={spin} disabled={spinning}>
+          {spinning ? 'Spinning...' : 'Spin The Wheel'}
+        </Button>
+      </div>
+    )
+
+  return (
+    <Card className='overflow-hidden'>
+      <CardContent className='flex flex-col items-center justify-center gap-4 text-center p-0'>
+        {/* Spinning Wheel SVG with overlay */}
         <div
           className='relative flex items-center justify-center'
           style={{ width: WHEEL_SIZE + 20, height: WHEEL_SIZE + 20 }}
         >
+          {/* Overlay with blur and absolute centering */}
+          {showOverlay && (
+            <div
+              className='absolute inset-0 z-30 flex flex-col items-center justify-center transition-opacity duration-300'
+              style={{
+                background: 'rgba(30,41,59,0.45)', // dark overlay
+                backdropFilter: 'blur(8px)',
+                WebkitBackdropFilter: 'blur(8px)',
+              }}
+            >
+              {overlayText}
+            </div>
+          )}
           <svg width={WHEEL_SIZE} height={WHEEL_SIZE} viewBox={`0 0 ${WHEEL_SIZE} ${WHEEL_SIZE}`}>
             {/* Rotating segments group */}
             <g
@@ -132,14 +162,6 @@ function SpinWheel() {
             </svg>
           </div>
         </div>
-        <Button onClick={spin} disabled={spinning} className='mt-2'>
-          {spinning ? 'Spinning...' : 'Spin The Wheel'}
-        </Button>
-        {selected !== null && !spinning && (
-          <div className='mt-2 text-lg font-bold'>
-            You won: <span className='text-primary'>{PRIZES[selected]}</span>
-          </div>
-        )}
       </CardContent>
     </Card>
   )
