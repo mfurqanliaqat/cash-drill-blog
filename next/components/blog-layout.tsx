@@ -19,27 +19,37 @@ export function BlogLayout({
   return (
     <>
       <PayoutSliderStrip />
-      <Container className='mt-16 lg:mt-18'>
-        <div className='grid grid-cols-1 lg:grid-cols-12 gap-4'>
-          <div className='lg:col-span-9'>
+      <Container className='mt-8 sm:mt-12 lg:mt-16'>
+        <div className='grid grid-cols-1 md:grid-cols-12 gap-4 lg:gap-6'>
+          {/* Main content area */}
+          <div className='md:col-span-8 lg:col-span-9 order-1 md:order-1'>
             <BlogArticleOverview article={article} locale={locale} />
             <Card className='bg-background-main'>
               <DynamicTOC contentSelector='#blog-content' />
-              <article className='pb-8 pt-8 px-4'>
+              <article className='pb-6 sm:pb-8 pt-6 sm:pt-8 px-4 sm:px-6 lg:px-8'>
                 <div className='flex items-center justify-center'>
-                  <div id='blog-content' className='mt-8 prose prose-lg prose-invert'>
+                  <div
+                    id='blog-content'
+                    className='mt-6 sm:mt-8 prose prose-sm sm:prose-base lg:prose-lg prose-invert max-w-none w-full'
+                  >
                     {children}
                   </div>
                 </div>
               </article>
             </Card>
           </div>
-          <div className='lg:col-span-3 flex flex-col gap-4'>
+
+          {/* Sidebar */}
+          <div className='md:col-span-4 lg:col-span-3 order-2 md:order-2 flex flex-col gap-4'>
             <QuickOverview locale={locale} />
           </div>
         </div>
+
+        {/* Dynamic zone section */}
         {article?.dynamic_zone && (
-          <DynamicZoneManager dynamicZone={article?.dynamic_zone} locale={locale} />
+          <div className='mt-8 sm:mt-12'>
+            <DynamicZoneManager dynamicZone={article?.dynamic_zone} locale={locale} />
+          </div>
         )}
       </Container>
     </>

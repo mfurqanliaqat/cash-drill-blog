@@ -57,7 +57,7 @@ function EarningEstimate({ heading, caption, sliderText }: any) {
               </SliderPrimitive.Root>
             </div>
 
-            <Button>Start Earning Now &rarr;</Button>
+            <Button className='hidden md:block'>Start Earning Now &rarr;</Button>
           </div>
           {/* Right Side - Bars */}
           <div className='flex-1 flex flex-col justify-center items-center gap-4'>
@@ -118,6 +118,8 @@ function EarningEstimate({ heading, caption, sliderText }: any) {
               specific offers available at the time of playing.
             </p>
           </div>
+
+          <Button className='block md:hidden'>Start Earning Now &rarr;</Button>
         </CardContent>
       </Card>
     </div>
