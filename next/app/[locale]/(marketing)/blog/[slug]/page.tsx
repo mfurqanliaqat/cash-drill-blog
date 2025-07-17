@@ -17,12 +17,14 @@ export default async function SingleArticlePage({
 }: {
   params: { slug: string; locale: string }
 }) {
+  const { locale } = await params
+
   const article = await fetchContentType(
     'articles',
     {
       filters: {
         slug: params.slug,
-        locale: params.locale,
+        locale: locale,
       },
     },
     true
@@ -41,11 +43,11 @@ export default async function SingleArticlePage({
       acc[localization.locale] = localization.slug
       return acc
     },
-    { [params.locale]: params.slug }
+    { [locale]: params.slug }
   )
 
   return (
-    <BlogLayout article={article} locale={params.locale}>
+    <BlogLayout article={article} locale={locale}>
       <ClientSlugHandler localizedSlugs={localizedSlugs} />
       {/* <BlocksRenderer content={article.content} /> */}
       {article.dynamicContent?.map((block: any, index: number) => {
@@ -53,7 +55,7 @@ export default async function SingleArticlePage({
           return <BlocksRenderer key={index} content={block.content} />
         }
         if (block.__component === 'widgets.cta') {
-          return <CTA key={index} locale={params.locale} {...block} />
+          return <CTA key={index} locale={locale} {...block} />
         }
         if (block.__component === 'widgets.table') {
           return <Table key={index} {...block} />

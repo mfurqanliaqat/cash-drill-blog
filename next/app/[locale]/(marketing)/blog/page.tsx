@@ -19,10 +19,11 @@ export async function generateMetadata({
 }: {
   params: { locale: string }
 }): Promise<Metadata> {
+  const { locale } = await params
   const pageData = await fetchContentType(
     'blog-page',
     {
-      filters: { locale: params.locale },
+      filters: { locale: locale },
       populate: 'seo.metaImage',
     },
     true
@@ -34,28 +35,29 @@ export async function generateMetadata({
 }
 
 export default async function Blog({ params }: { params: { locale: string; slug: string } }) {
+  const { locale } = await params
   const blogPage = await fetchContentType(
     'blog-page',
     {
-      filters: { locale: params.locale },
+      filters: { locale: locale },
     },
     true
   )
   const articles = await fetchContentType(
     'articles',
     {
-      filters: { locale: params.locale },
+      filters: { locale: locale },
     },
     false
   )
-  const payouts = await fetchContentType('payouts', {}, false)
+  // const payouts = await fetchContentType('payouts', {}, false)
 
   const localizedSlugs = blogPage.localizations?.reduce(
     (acc: Record<string, string>, localization: any) => {
       acc[localization.locale] = 'blog'
       return acc
     },
-    { [params.locale]: 'blog' }
+    { [locale]: 'blog' }
   )
 
   return (
@@ -74,7 +76,7 @@ export default async function Blog({ params }: { params: { locale: string; slug:
         </div>
 
         {articles.data.slice(0, 1).map((article: Article) => (
-          <BlogCard article={article} locale={params.locale} key={article.title} />
+          <BlogCard article={article} locale={locale} key={article.title} />
         ))}
 
         <BlogPostRows articles={articles.data} />

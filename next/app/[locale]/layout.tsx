@@ -26,10 +26,11 @@ export async function generateMetadata({
 }: {
   params: { locale: string; slug: string }
 }): Promise<Metadata> {
+  const { locale } = await params
   const pageData = await fetchContentType(
     'global',
     {
-      filters: { locale: params.locale },
+      filters: { locale: locale },
       populate: 'seo.metaImage',
     },
     true
@@ -42,11 +43,12 @@ export async function generateMetadata({
 
 export default async function LocaleLayout({
   children,
-  params: { locale },
+  params,
 }: {
   children: React.ReactNode
   params: { locale: string }
 }) {
+  const { locale } = await params
   const pageData = await fetchContentType('global', { filters: { locale } }, true)
   return (
     <html lang={locale}>
