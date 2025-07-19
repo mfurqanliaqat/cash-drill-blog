@@ -22,7 +22,7 @@ export function BlogLayout({
       <Container className='mt-8 sm:mt-12 lg:mt-16'>
         <div className='grid grid-cols-1 md:grid-cols-12 gap-4 lg:gap-6'>
           {/* Main content area */}
-          <div className='md:col-span-8 lg:col-span-9 order-1 md:order-1'>
+          <div className='md:col-span-8 lg:col-span-9 order-1 md:order-1 '>
             <BlogArticleOverview article={article} locale={locale} />
             <Card className='bg-background-main'>
               <DynamicTOC contentSelector='#blog-content' />
@@ -30,7 +30,7 @@ export function BlogLayout({
                 <div className='flex items-center justify-center'>
                   <div
                     id='blog-content'
-                    className='mt-6 sm:mt-8 prose prose-sm sm:prose-base lg:prose-lg prose-invert max-w-none w-full'
+                    className='mt-6 sm:mt-8 prose prose-sm sm:prose-base lg:prose-lg prose-invert w-full'
                   >
                     {children}
                   </div>

@@ -27,10 +27,10 @@ function EarningEstimate({ heading, caption, sliderText }: any) {
   return (
     <div className='w-full max-w-3xl mx-auto my-8'>
       <Card variant='gradient'>
-        <CardContent className='p-6 flex flex-col md:flex-row gap-20'>
+        <CardContent className='p-6 flex flex-col md:flex-row gap-8 md:gap-20'>
           {/* Left Side */}
           <div className='flex-1 flex flex-col justify-between'>
-            <div className='space-y-4 mb-20'>
+            <div className='space-y-4 mb-8 md:mb-20'>
               <h2 className='text-2xl font-semibold leading-tight text-white'>{heading}</h2>
               <p className='text-muted text-base'>{caption}</p>
             </div>
@@ -61,11 +61,11 @@ function EarningEstimate({ heading, caption, sliderText }: any) {
           </div>
           {/* Right Side - Bars */}
           <div className='flex-1 flex flex-col justify-center items-center gap-4'>
-            <div className='flex flex-row items-end gap-8 h-full w-full justify-center'>
+            <div className='flex flex-row items-end gap-8 h-60 md:h-full w-full justify-center'>
               {/* CashDrill Bar */}
               <div className='flex flex-col items-center w-24 h-full'>
                 <div className='relative w-full flex-1 flex flex-col justify-end items-center'>
-                  <span className='text-primary text-3xl font-extrabold mb-2'>
+                  <span className='text-primary text-2xl md:text-3xl font-extrabold mb-2'>
                     ${cashDrillEarnings.toFixed(2)}
                   </span>
                   <span className='text-primary text-sm font-bold mb-2 flex items-center gap-1'>
@@ -100,7 +100,7 @@ function EarningEstimate({ heading, caption, sliderText }: any) {
               {/* Average Bar */}
               <div className='flex flex-col items-center w-24 h-full'>
                 <div className='relative w-full flex-1 flex flex-col justify-end items-center'>
-                  <span className='text-white text-2xl font-extrabold mb-2'>
+                  <span className='text-white text-xl md:text-2xl font-extrabold mb-2'>
                     ${averageEarnings.toFixed(2)}
                   </span>
                   <span className='text-muted text-sm font-bold mb-2 text-center'>
