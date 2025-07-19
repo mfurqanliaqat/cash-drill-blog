@@ -17,7 +17,7 @@ const ComparisonTable: React.FC<ComparisonTableProps> = ({ heading, header, rows
     <div className='w-full max-w-3xl mx-auto my-8'>
       {heading && <h2 className='text-2xl font-bold mb-4'>{heading}</h2>}
       <Card variant='gradient'>
-        <Table>
+        <Table className='min-w-full not-prose'>
           {caption && <TableCaption>{caption}</TableCaption>}
           {header && (
             <TableHeader>

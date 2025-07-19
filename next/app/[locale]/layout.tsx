@@ -51,14 +51,12 @@ export default async function LocaleLayout({
   const { locale } = await params
   const pageData = await fetchContentType('global', { filters: { locale } }, true)
   return (
-    <html lang={locale}>
-      <ViewTransitions>
-        <body className={cn('bg-background-main antialiased h-full w-full', rethinkSans.className)}>
-          <Navbar data={pageData.navbar} locale={locale} />
-          {children}
-          <Footer data={pageData.footer} locale={locale} />
-        </body>
-      </ViewTransitions>
-    </html>
+    <ViewTransitions>
+      <main className={cn('bg-background-main antialiased h-full w-full', rethinkSans.className)}>
+        <Navbar data={pageData.navbar} locale={locale} />
+        {children}
+        <Footer data={pageData.footer} locale={locale} />
+      </main>
+    </ViewTransitions>
   )
 }

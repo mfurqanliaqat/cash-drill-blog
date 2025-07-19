@@ -23,15 +23,16 @@ export async function generateStaticParams() {
   return i18n.locales.map(locale => ({ lang: locale }))
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
   params,
 }: {
   children: React.ReactNode
-  params: { lang: Locale }
+  params: { locale: Locale }
 }) {
+  const { locale } = await params
   return (
-    <html lang={params.lang} suppressHydrationWarning>
+    <html lang={locale} suppressHydrationWarning>
       <body suppressHydrationWarning>
         <SlugProvider>{children}</SlugProvider>
       </body>

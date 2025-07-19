@@ -46,11 +46,11 @@ function EarningEstimate({ heading, caption, sliderText }: any) {
                 }}
                 className='relative flex w-full touch-none select-none items-center'
               >
-                <SliderPrimitive.Track className='relative h-2 w-full grow overflow-hidden rounded-full bg-border-card'>
+                <SliderPrimitive.Track className='relative h-2 w-full grow overflow-hidden rounded-full bg-muted'>
                   <SliderPrimitive.Range className='absolute h-full bg-secondary' />
                 </SliderPrimitive.Track>
                 <SliderPrimitive.Thumb asChild>
-                  <span className='px-3 py-2 rounded-full bg-white text-black text-sm shadow text-center whitespace-nowrap outline-none cursor-pointer'>
+                  <span className='px-2 py-1 -ml-8 rounded-full bg-white text-black text-xs shadow text-center whitespace-nowrap outline-none cursor-pointer'>
                     {minutes} min
                   </span>
                 </SliderPrimitive.Thumb>

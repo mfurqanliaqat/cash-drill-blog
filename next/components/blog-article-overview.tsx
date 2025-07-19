@@ -95,7 +95,7 @@ export const BlogArticleOverview = ({ article, locale }: { article: Article; loc
           <div className='flex gap-4 flex-wrap mb-4 justify-center items-center font-bold text-muted'>
             {format(new Date(article.publishedAt), 'dd.MM.yyyy')}
             <div className='h-5 rounded-lg w-0.5 bg-neutral-700' />
-            <span className='hover:text-primary'>{article.author.name}</span>
+            <span className='hover:text-primary'>{article.author?.name}</span>
           </div>
         </div>
       </div>

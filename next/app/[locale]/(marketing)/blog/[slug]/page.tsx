@@ -17,13 +17,13 @@ export default async function SingleArticlePage({
 }: {
   params: { slug: string; locale: string }
 }) {
-  const { locale } = await params
+  const { locale, slug } = await params
 
   const article = await fetchContentType(
     'articles',
     {
       filters: {
-        slug: params.slug,
+        slug: slug,
         locale: locale,
       },
     },
@@ -43,7 +43,7 @@ export default async function SingleArticlePage({
       acc[localization.locale] = localization.slug
       return acc
     },
-    { [locale]: params.slug }
+    { [locale]: slug }
   )
 
   return (

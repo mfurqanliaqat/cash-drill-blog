@@ -19,7 +19,7 @@ const DataTable: React.FC<DataTableProps> = ({ heading, header, rows, caption })
       {heading && <div className='text-2xl font-bold mb-4'>{heading}</div>}
       <Card variant='gradient'>
         <div className='overflow-x-auto'>
-          <Table className='min-w-full'>
+          <Table className='min-w-full not-prose'>
             {caption && <TableCaption>{caption}</TableCaption>}
             {header && (
               <TableHeader>
