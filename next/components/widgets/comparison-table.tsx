@@ -15,7 +15,7 @@ import { Card } from '../ui/card'
 const ComparisonTable: React.FC<ComparisonTableProps> = ({ heading, header, rows, caption }) => {
   return (
     <div className='w-full max-w-3xl mx-auto my-8'>
-      {heading && <h2 className='text-2xl font-bold mb-4'>{heading}</h2>}
+      {heading && <h2 className='text-2xl font-bold'>{heading}</h2>}
       <Card variant='gradient'>
         <Table className='min-w-full not-prose'>
           {caption && <TableCaption>{caption}</TableCaption>}
